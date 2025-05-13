@@ -19,6 +19,7 @@ urlpatterns = [
     path('deparment/pastoral-care/', views.pastoral, name='pastoral'),
     path('deparment/missions/', views.missions, name='missions'),
     path('deparment/protocol/', views.protocol, name='protocol'),
+    path('fellowship_sunday/january/', views.january, name='january'),
     path('deparment/benevolence/', views.benevolence, name='benevolence'), 
     path('Queen-Esther/2016/', views.esther16, name='esther16'),
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),

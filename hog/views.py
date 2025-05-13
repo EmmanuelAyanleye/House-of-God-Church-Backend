@@ -56,6 +56,9 @@ def benevolence(request):
 def esther16(request):
     return render(request, 'pages/esther16.html')
 
+def january(request):
+    return render(request, 'pages/january.html')
+
 def is_staff(user):
     return user.is_staff
 
