@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Protocol Department - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+     <div class="hero-section mt-5 pt-3">
+    <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('images/ca1.png');">
+          <div class="carousel-overlay">
+            <h1>PROTOCOL DEPARTMENT</h1>
+            <p>They ensure orderliness and coordination at all times</p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/ca3.png');">
+          <div class="carousel-overlay">
+            <h1>PROTOCOL DEPARTMENT</h1>
+            <p>They ensure orderliness and coordination at all times</p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/Rectangle\ 4.png');">
+          <div class="carousel-overlay">
+            <h1>PROTOCOL DEPARTMENT</h1>
+            <p>They ensure orderliness and coordination at all times</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#churchCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#churchCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      
+      <!-- Custom indicators -->
+      <div class="custom-indicators">
+        <div class="custom-indicator active" data-bs-target="#churchCarousel" data-bs-slide-to="0"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="1"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="2"></div>
+      </div>
+    </div>
+      </div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/pastor.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Bro Henry Esonu</h4>
+              <p class="hod-info text-muted small">
+                The Protocol Department is headed by Bro Henry Esonu and he has been serving as the HOD from inception till date.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:protocol@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>protocol@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Protocol Department of the Household of God church was established in 2011. They are duly assigned to handle all the logistics and travels for the pastor and other contingent of the ministry globally. They ensure orderliness and coordination at all times during the church service and other programmes in church. They are in charge of security frisking during church services and maintenance of order inside the auditorium during church services.
+              <br><br>
+              The protocol department has an approximate membership of 40, both male and female inclusive who meet every last Saturday of the month.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

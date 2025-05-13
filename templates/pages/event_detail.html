@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% load static %} {% block title %} G.R.A.C.E {{ event.year }} -
+HOUSEHOLD OF GOD CHURCH{% endblock %} {% block content %}
+<div class="container church-section">
+  <div class="row align-items-stretch church-row">
+    <div class="col-md-5 d-flex">
+      <div class="w-100 h-100">
+        <img
+          src="{{ event.winner_image.url }}"
+          alt="{{ event.title }}"
+          class="church-image h-100 w-100 object-fit-cover rounded"
+        />
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="d-flex flex-column justify-content-center w-100">
+        <h2 class="church-title">{{ event.title }}</h2>
+        <p class="church-text">{{ event.description|linebreaks }}</p>
+      </div>
+    </div>
+  </div>
+
+  {% if event.gallery.all %}
+  <h2 class="church-title text-center mt-5 pt-5">
+    {{ event.category.name }} {{ event.year }} GALLERY
+  </h2>
+  <div class="container py-4">
+    <div class="row g-4">
+      {% for image in event.gallery.all %}
+      <div class="col-6 col-md-3">
+        <img
+          src="{{ image.image.url }}"
+          alt="{{ image.caption|default:event.title }}"
+          class="gallery-img"
+          data-full="{{ image.image.url }}"
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Lightbox overlay -->
+<div class="overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="Lightbox Image">
+  <div class="controls">
+    <button class="btn btn-outline-light" onclick="prevImage()" title="Previous">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <a class="btn btn-outline-light" id="downloadBtn" download target="_blank" title="Download">
+      <i class="fas fa-download"></i>
+    </a>
+    <button class="btn btn-outline-light" onclick="nextImage()" title="Next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <button class="btn btn-outline-light" onclick="closeLightbox()" title="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+  const images = document.querySelectorAll('.gallery-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showImage(img.dataset.full);
+    });
+  });
+
+  function showImage(src) {
+    lightboxImg.src = src;
+    downloadBtn.href = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+</script>
+{% endblock %} {% endblock %}

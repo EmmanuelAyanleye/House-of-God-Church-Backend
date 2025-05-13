@@ -1,0 +1,134 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="#">
+              <img src="{% static 'images/hog-logo.png' %}" alt="Logo">
+          </a>
+          <button class="navbar-toggler" type="button" id="navbar-toggler">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a></li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">About</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{% url 'our_church' %}">Our Church</a></li>
+                      <li><a class="dropdown-item" href="{% url 'our_pastor' %}">Our Pastor</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Departments</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{% url 'children' %}">Children's Church</a></li>
+                      <li><a class="dropdown-item" href="{% url 'singles' %}">Singles Department</a></li>
+                      <li><a class="dropdown-item" href="{%url 'works' %}">Works Department</a></li>
+                      <li><a class="dropdown-item" href="{% url 'publication' %}">Publication Department</a></li>
+                      <li><a class="dropdown-item" href="{% url 'evangelism' %}">Evangelism Department</a></li>
+                      <li><a class="dropdown-item" href="{% url 'holy' %}">Holy Police</a></li>
+                      <li><a class="dropdown-item" href="{% url 'technical' %}">Technical Crew</a></li>
+                      <li><a class="dropdown-item" href="{% url 'villa' %}">Villa Sanitation</a></li>
+                      <li><a class="dropdown-item" href="{% url 'pastoral' %}">Pastoral Care</a></li>
+                      <li><a class="dropdown-item" href="{% url 'missions' %}">Missions Department</a></li>
+                      <li><a class="dropdown-item" href="{% url 'protocol' %}">Protocol Department</a></li>
+                      <li><a class="dropdown-item" href="{% url 'benevolence' %}">Benevolence Department</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Events</a>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-submenu">
+                            <a class="dropdown-item" href="#">Fellowship Sunday</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November</a></li>
+                                <li><a class="dropdown-item" href="#">December</a></li>
+                            </ul>
+                          </li>
+                          <li class="dropdown-submenu">
+                            <a class="dropdown-item" href="#">Christmas Carol Competition</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November</a></li>
+                                <li><a class="dropdown-item" href="#">December</a></li>
+                            </ul>
+                          </li>
+                          <li class="dropdown-submenu">
+                            <a class="dropdown-item" href="#">Hallelujah Party</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November</a></li>
+                                <li><a class="dropdown-item" href="#">December</a></li>
+                            </ul>
+                          </li>
+                          <li><a class="dropdown-item" href="#">Baby Dedication</a></li>
+                          <li><a class="dropdown-item" href="#">Weddings</a></li>
+                          <li class="dropdown-submenu">
+                                <a class="dropdown-item" href="#">Queen Esther</a>
+                                <ul class="dropdown-menu">
+                                    {% for event in queen_esther_events %}
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'event_detail' event.slug %}">
+                                            Queen Esther {{ event.year }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                          <li class="dropdown-submenu">
+                                <a class="dropdown-item" href="#">G.R.A.C.E</a>
+                                <ul class="dropdown-menu">
+                                    {% for event in grace_events %}
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'event_detail' event.slug %}">
+                                            G.R.A.C.E {{ event.year }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                          <li><a class="dropdown-item" href="#">Christmas Lights</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Media</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Church Gallery</a></li>
+                      <li><a class="dropdown-item" href="#">Pastor's Gallery</a></li>
+                      <li><a class="dropdown-item" href="#">Music</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"><a class="nav-link" href="#contact-section">Contact Us</a></li>
+              </ul>
+          </div>
+      </div>
+    </nav>
+  </header>

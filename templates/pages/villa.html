@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Villa Sanitation - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+     <div class="hero-section mt-5 pt-3">
+    <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('images/ca1.png');">
+          <div class="carousel-overlay">
+            <h1>VILLA SANITATION</h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/ca3.png');">
+          <div class="carousel-overlay">
+            <h1>VILLA SANITATION</h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/Rectangle\ 4.png');">
+          <div class="carousel-overlay">
+            <h1>VILLA SANITATION</h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#churchCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#churchCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      
+      <!-- Custom indicators -->
+      <div class="custom-indicators">
+        <div class="custom-indicator active" data-bs-target="#churchCarousel" data-bs-slide-to="0"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="1"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="2"></div>
+      </div>
+    </div>
+      </div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/pastor.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">MRS EDNA ONOME OKE</h4>
+              <p class="hod-info text-muted small">
+                The name of the H.O.D is MRS EDNA ONOME OKE and she has been serving for 17 Years
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:villa_sanitation@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>villa_sanitation@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Villa Sanitation Department was formed and inaugurated in 1998. The department is responsible for the cleaning of the Church auditorium, ensuring it is kept clean, curtains and chairs properly arranged at all times. They oversee the preparation of the Communion element and its administration both for service and weddings. They also provide toiletries for the restrooms during service.
+              <br><br>
+              The Villa Sanitation has an approximate membership of 100, both men and women. Their meeting days are; Wednesdays (6am – 9am) Fridays (4pm – 6pm) Saturdays (12noon, till the end of every Church activities) and Sundays (Only on first Sunday of every month for communion purposes)
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

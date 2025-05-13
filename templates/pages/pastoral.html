@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Pastoral Care - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+     <div class="hero-section mt-5 pt-3">
+    <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('images/ca1.png');">
+          <div class="carousel-overlay">
+            <h1>PASTORAL CARE</h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/ca3.png');">
+          <div class="carousel-overlay">
+            <h1>PASTORAL CARE</h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/Rectangle\ 4.png');">
+          <div class="carousel-overlay">
+            <h1>PASTORAL CARE</h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#churchCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#churchCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      
+      <!-- Custom indicators -->
+      <div class="custom-indicators">
+        <div class="custom-indicator active" data-bs-target="#churchCarousel" data-bs-slide-to="0"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="1"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="2"></div>
+      </div>
+    </div>
+      </div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/pastor.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Miss Ogorchukwu Ogweh</h4>
+              <p class="hod-info text-muted small">
+                The administrative Head of Department is Miss Ogorchukwu Ogweh.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:pastoral_care@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>pastoral_care@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Pastoral Care Department was set up in 1998 from the various Church units that had closely worked with the Pastor. It is structured to meet the needs of the brethren and ensure the proper organization of the specific arms of the ministry. It comes directly under the office of the Pastor of the Church, Rev. Chris Okotie.
+              <br>
+                There are 4 core units which make up the department: <br>
+                <strong>VISITATION</strong> <br>
+                Visitation section is simply VISITATION: To establish PERSONAL CONTACT with members of the local Church. The team relies on requests from needy members and information offered by friends and family who need the attention of the team for fellowship encouragement and prayer support, through the ‘I Care‘ cards.
+                <br>
+                <strong>PRAISE & WORSHIP TEAM</strong><br>
+                This section leads the congregation in Praise and Worship to God and our Lord Jesus Christ during services (Sundays and Wednesdays), and during functions like weddings and the Church’s annual GRACE Programme.
+                <br>
+                <strong>AUDIO/VIDEO CREW SECTION</strong><br>
+                The Audio-Visual Section comprises of the audio-visual crew and the tape ministry. It is responsible for the recording of the Church’s sermons on both audio and video and Church’s audio and video equipment’s for ensuring audibility of the sermon, praise and worship as well as the visual display of activities and lyrics of songs.
+                <br>
+                <strong>CHRISTIAN PARENTING CLASS</strong><br>
+                The Christian Parenting Class ministers Biblical principles of good parenting and child upbringing to married couples either believing God for the fruit of the womb or already expectant parents. It also offers physical fitness regimen to help ensure that expectant mothers are fit and strong throughout the duration of their pregnancy.
+                The department which has over 50 listed members meets twice a month: first and third Saturdays, from 12 noon on the Church premises
+                The administrative Head of Department is Miss Ogorchukwu Ogweh. She joined The Household of God International Church on February 1, 1988. She has been a volunteer Church worker for 27 years, out of which time she has led the Pastoral Care Department for 16 years.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}
