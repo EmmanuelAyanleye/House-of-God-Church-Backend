@@ -23,9 +23,16 @@
       }
       .admin-nav .nav-link {
         color: rgba(255, 255, 255, 0.75);
+        padding: 0.5rem 1rem; /* Add padding */
+        margin-right: 0.5rem; /* Add margin between items */
       }
       .admin-nav .nav-link:hover {
         color: white;
+      }
+      .nav-links-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem; /* Add consistent gap between nav items */
       }
     </style>
   </head>
@@ -35,9 +42,24 @@
         <a class="navbar-brand" href="{% url 'admin_dashboard' %}"
           >HOG Admin Dashboard</a
         >
-        <div class="d-flex">
-          <a href="{% url 'index' %}" class="nav-link me-3">View Site</a>
-          <a href="{% url 'admin_logout' %}" class="nav-link">Logout</a>
+        <div class="nav-links-container">
+          <a class="nav-item nav-link" href="{% url 'admin_dashboard' %}"
+            >Dashboard</a
+          >
+          <a class="nav-item nav-link" href="{% url 'events_list' %}"
+            >Category Events</a
+          >
+          <a class="nav-item nav-link" href="{% url 'monthly_events_list' %}"
+            >Monthly Events</a
+          >
+          <div class="border-start ms-2 ps-2">
+            <!-- Add separator -->
+            <a href="{% url 'index' %}" class="nav-link">View Site</a>
+          </div>
+          <div class="border-start ps-2">
+            <!-- Add separator -->
+            <a href="{% url 'admin_logout' %}" class="nav-link">Logout</a>
+          </div>
         </div>
       </div>
     </nav>

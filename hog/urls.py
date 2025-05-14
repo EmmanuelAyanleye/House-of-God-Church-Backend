@@ -5,9 +5,12 @@ from django.conf.urls.static import static
 from hog import views
 
 urlpatterns = [
+    # Public routes
     path('', views.index, name='index'),
     path('our-church/', views.our_church, name='our_church'),
     path('our-pastor/', views.our_pastor, name='our_pastor'),
+    
+    # Department routes
     path('deparment/singles/', views.singles, name='singles'),
     path('deparment/children/', views.children, name='children'),
     path('deparment/works/', views.works, name='works'),
@@ -19,23 +22,51 @@ urlpatterns = [
     path('deparment/pastoral-care/', views.pastoral, name='pastoral'),
     path('deparment/missions/', views.missions, name='missions'),
     path('deparment/protocol/', views.protocol, name='protocol'),
+    path('deparment/benevolence/', views.benevolence, name='benevolence'),
+    
+    # Fellowship and special events
     path('fellowship_sunday/january/', views.january, name='january'),
-    path('deparment/benevolence/', views.benevolence, name='benevolence'), 
     path('Queen-Esther/2016/', views.esther16, name='esther16'),
-    path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
-    path('admin/event/create/', views.create_event, name='admin_create_event'),
-    path('admin/event/<slug:slug>/', views.event_detail, name='admin_event_detail'),
-    path('admin/event/<slug:slug>/edit/', views.edit_event, name='admin_edit_event'),
-    path('admin/event/<slug:slug>/gallery/add/', views.add_gallery_images, name='admin_add_gallery'),
+    path('event/<slug:slug>/', views.event_public_view, name='event_detail'),
+    
+    # Custom admin routes
     path('custom-admin/', views.admin_dashboard, name='admin_dashboard'),
+    path('custom-admin/login/', views.admin_login, name='admin_login'),
+    path('custom-admin/logout/', views.admin_logout, name='admin_logout'),
     path('custom-admin/event/create/', views.create_event, name='admin_create_event'),
     path('custom-admin/event/<slug:slug>/', views.event_detail, name='admin_event_detail'),
     path('custom-admin/event/<slug:slug>/edit/', views.edit_event, name='admin_edit_event'),
+    path('custom-admin/event/<int:pk>/delete/', views.delete_event, name='admin_delete_event'),
     path('custom-admin/event/<slug:slug>/gallery/add/', views.add_gallery_images, name='admin_add_gallery'),
-    path('custom-admin/gallery-image/<int:image_id>/delete/', 
-         views.delete_gallery_image, 
-         name='delete_gallery_image'),
-    path('custom-admin/login/', views.admin_login, name='admin_login'),
-    path('custom-admin/logout/', views.admin_logout, name='admin_logout'),
-    path('event/<slug:slug>/', views.event_public_view, name='event_detail'),
+    path('custom-admin/gallery-image/<int:image_id>/delete/', views.delete_gallery_image, name='delete_gallery_image'),
+    path('custom-admin/events/', views.events_list, name='events_list'),
+    path('custom-admin/monthly-events/', views.monthly_events_list, name='monthly_events_list'),
+    
+    # Monthly events routes
+    path('custom-admin/monthly-events/', views.monthly_events_list, name='monthly_events_list'),
+    path('custom-admin/monthly-events/create/', views.create_monthly_event, name='create_monthly_event'),
+    path('custom-admin/monthly-events/<slug:slug>/', views.monthly_event_detail, name='monthly_event_detail'),
+    path('custom-admin/monthly-events/<int:pk>/edit/', views.edit_monthly_event, name='edit_monthly_event'),
+    path('custom-admin/monthly-events/<int:pk>/delete/', views.delete_monthly_event, name='delete_monthly_event'),
+    path('custom-admin/monthly-events/<int:event_id>/gallery/add/', 
+         views.add_monthly_event_gallery, 
+         name='add_monthly_event_gallery'),
+    path('<str:category>/<int:month>/<int:year>/', views.monthly_event_public_view, name='monthly_event_view'),
+    path('monthly-events/<str:event_type>/<int:month>/', views.monthly_event_month, name='monthly_event_month'),
+    
+    # Monthly events public routes
+    path('fellowship-sunday/<str:month>/', 
+         views.monthly_event_view, 
+         kwargs={'event_type': 'Fellowship Sunday'},
+         name='fellowship_sunday'),
+         
+    path('christmas-carol/<str:month>/', 
+         views.monthly_event_view,
+         kwargs={'event_type': 'Christmas Carol Competition'},
+         name='christmas_carol'),
+         
+    path('hallelujah-party/<str:month>/',
+         views.monthly_event_view,
+         kwargs={'event_type': 'Hallelujah Party'},
+         name='hallelujah_party'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

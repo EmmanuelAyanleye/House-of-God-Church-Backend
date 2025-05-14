@@ -64,7 +64,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'hog.views.get_event_categories',  # Add this line
+                'hog.context_processors.categories_processor',
+                'hog.context_processors.events_processor',
+                'hog.context_processors.monthly_events_processor',
             ],
         },
     },
@@ -126,6 +128,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+LOGIN_URL = 'admin_login'
+LOGIN_REDIRECT_URL = 'admin_dashboard'
+LOGOUT_REDIRECT_URL = 'admin_login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

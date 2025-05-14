@@ -1,0 +1,57 @@
+{% extends 'admin/base_admin.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Category Events</h2>
+        <a href="{% url 'admin_create_event' %}" class="btn btn-primary">Create New Event</a>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="mb-4">
+        <form method="get" class="form-inline">
+            <div class="input-group">
+                <select name="category" class="form-control">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        {% for event in events %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if event.winner_image %}
+                <img src="{{ event.winner_image.url }}" class="card-img-top" alt="{{ event.title }}" 
+                     style="height: 200px; object-fit: cover">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <p class="card-text"><strong>Year:</strong> {{ event.year }}</p>
+                    <p class="card-text"><strong>Category:</strong> {{ event.category }}</p>
+                    <div class="btn-group">
+                        <a href="{% url 'admin_event_detail' event.slug %}" class="btn btn-sm btn-info">View</a>
+                        <a href="{% url 'admin_edit_event' event.slug %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'admin_delete_event' event.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No events found.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

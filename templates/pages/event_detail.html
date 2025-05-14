@@ -1,5 +1,12 @@
-{% extends 'base.html' %} {% load static %} {% block title %} G.R.A.C.E {{ event.year }} -
-HOUSEHOLD OF GOD CHURCH{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}
+    {% if event.category.name == 'G.R.A.C.E' %}
+        G.R.A.C.E {{ event.year }} - HOUSEHOLD OF GOD CHURCH
+    {% elif event.category.name == 'Queen Esther' %}
+        Queen Esther {{ event.year }} - HOUSEHOLD OF GOD CHURCH
+    {% else %}
+        {{ event.category.name }} {{ event.year }} - HOUSEHOLD OF GOD CHURCH
+    {% endif %}
+{% endblock %} {% block content %}
 <div class="container church-section">
   <div class="row align-items-stretch church-row">
     <div class="col-md-5 d-flex">

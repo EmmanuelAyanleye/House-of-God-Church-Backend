@@ -1,0 +1,45 @@
+{% extends 'admin/base_admin.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>{% if event %}Edit{% else %}Create{% endif %} Monthly Event</h2>
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="id_event_type" class="form-label">Event Type</label>
+          <select name="event_type" id="id_event_type" class="form-control">
+            <option value="">Select Event Type</option>
+            <option value="Fellowship Sunday">Fellowship Sunday</option>
+            <option value="Christmas Carol Competition">
+              Christmas Carol Competition
+            </option>
+            <option value="Hallelujah Party">Hallelujah Party</option>
+          </select>
+        </div>
+
+        {% for field in form %} {% if field.name != 'event_type' %}
+        <div class="mb-3">
+          <label for="{{ field.id_for_label }}" class="form-label"
+            >{{ field.label }}</label
+          >
+          {{ field }} {% if field.errors %}
+          <div class="invalid-feedback d-block">
+            {{ field.errors|join:", " }}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %} {% endfor %}
+
+        <button type="submit" class="btn btn-primary">
+          {% if event %}Update{% else %}Create{% endif %} Event
+        </button>
+        <a href="{% url 'monthly_events_list' %}" class="btn btn-secondary"
+          >Cancel</a
+        >
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
