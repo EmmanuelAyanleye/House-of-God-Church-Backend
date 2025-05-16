@@ -70,9 +70,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ event.title }}</h5>
             <p class="card-text">{{ event.date|date:"F j, Y" }}</p>
-            <p class="card-text">
-              <small class="text-muted">{{ event.event_type }}</small>
-            </p>
+            <p class="card-text"><small class="text-muted">{{ event }}</small></p>
             <div class="btn-group">
               <a href="{% url 'monthly_event_detail' event.slug %}" class="btn btn-sm btn-info">View</a>
               <a href="{% url 'edit_monthly_event' event.id %}" class="btn btn-sm btn-primary">Edit</a>

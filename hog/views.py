@@ -18,16 +18,156 @@ def index(request):
     return render(request, 'pages/index.html')
 
 def our_church(request):
-    return render(request, 'pages/aboutchurch.html')
+    page = int(request.GET.get('page', 1))
+    
+    # Define the content for each page
+    page_content = {
+        1: """The young ministry had its inaugural Sunday morning service on the 1st of February, 1987 in his living room, then in the Ikeja area of Lagos state. As membership of the young but peculiar church grew into the hundreds and thousands, the surrounding grounds of his house became sitting area for the overspill from the living room. 
+            <br><br>
+            The ministry of the church and the person of Reverend Chris Okotie as a minister of the gospel became nationally recognized when the Lord Jesus Christ inspired the inauguration of the GRACE PROGRAMME and the television ministry, APOKALUPSIS.""",
+        2: """The charity driven GRACE programme was instituted in 1990 and has become a major benevolence channel of the ministry on an annual basis. The objective of the programme as directed by the Lord Jesus is to extend the arm of care and sharing to the less privileged in the society through recognized non governmental organizations who deal directly with such people. 
+            <br><br>
+            In 1996 the KARIS AWARD, yet another inspiration by the Lord Jesus, which is aimed at appreciating Nigerians who have positively impacted the nation but have not been recognized by the government, was instituted and subsumed into the GRACE programme."""
+    }
+
+    context = {
+        'current_page': page,
+        'total_pages': len(page_content),
+        'content': page_content.get(page, ''),
+        'has_next': page < len(page_content),
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < len(page_content) else None,
+        'prev_page': page - 1 if page > 1 else None,
+    }
+    
+    return render(request, 'pages/aboutchurch.html', context)
 
 def our_pastor(request):
-    return render(request, 'pages/aboutpastor.html')
+    page = int(request.GET.get('page', 1))
+    
+    # Define content for each page
+    page_content = {
+        1: {
+            'text': """Reverend Chris Okotie was born on the 16th of June, 1958 to the family of Francis Idje and Cecilia Okotie in Ethiope West Local Government area of Delta State, South-South Nigeria. He had his primary education between 1964 and 1970 at Kirikiri Primary School, Lagos, as his father, who was a civil servant, was stationed in Lagos at the time. He proceeded to Edo College in Benin for his secondary education between 1971 and 1977. 
+            <br><br>
+            He had his 'A' Level certificate in 1978 and went on to study law at the University of Nigeria, Nsukka, in the former Anambra but now Enugu state. His multi-talented nature was evident from his childhood and became more apparent when he became the lead singer of the Edo College school band.
+            <br><br>
+            His exploits in music blossomed and while he was studying law at the University of Nigeria, Nsukka, he eventually rose to become the most celebrated Nigerian pop music star in 1980 when he released his first album, 'I Need Someone.'""",
+            'image': 'pastor.jpg'
+        },
+        2: {
+            'text': """At the peak of his young musical career and to the bewilderment of the show business world and the general public in 1984, he decided to abandon his musical career and return to the university to complete his study of law. It was in this period that he had his conversion experience and became a born again Christian, having experienced the saving grace of the Lord Jesus Christ. 
+            <br><br>
+            He was eventually awarded a Bachelor's degree in Law at his graduation in 1984, thereafter moving to the Nigerian Law School in Lagos. In 1985, in obedience to a divine call from the Lord Jesus Christ, he left the shores of Nigeria and proceeded to bible school in Tulsa, Oklahoma in the United States of America to prepare for a life of Christian ministry.
+            <br><br>
+            He returned to Nigeria in 1986, and after being commissioned by the Lord Jesus Christ, launched into the pastoral ministry with the inauguration of the HOUSEHOLD OF GOD FELLOWSHIP in 1987, and which later became THE HOUSEHOLD OF GOD INTERNATIONAL MINISTRIES.""",
+            'image': 'pastor2.jpg'
+        },
+        3: {
+            'text': """The young ministry had its inaugural Sunday morning service on the 1st of February, 1987 in his living room, then in the Ikeja area of Lagos state. As membership of the young but peculiar church grew into the hundreds and thousands, the surrounding grounds of his house became sitting area for the overspill from the living room. 
+            <br><br>
+            The ministry of the church and the person of Reverend Chris Okotie as a minister of the gospel became nationally recognized when the Lord Jesus Christ inspired the inauguration of the GRACE PROGRAMME and the television ministry, APOKALUPSIS.
+            <br><br>
+            The charity driven GRACE programme was instituted in 1990 and has become a major benevolence channel of the ministry on an annual basis. The objective of the programme as directed by the Lord Jesus is to extend the arm of care and sharing to the less privileged in the society through recognized non governmental organizations who deal directly with such people.""",
+            'image': 'pastor3.jpg'
+        },
+        4: {
+            'text': """In 1996 the KARIS AWARD, yet another inspiration by the Lord Jesus, which is aimed at appreciating Nigerians who have positively impacted the nation but have not been recognized by the government, was instituted and subsumed into the GRACE programme.
+            <br><br>
+            The KARIS award has been given over the years to distinguished Nigerians like Mallam Aminu Kano, Tai Solarin, Hajia Gambo Sawaba, Gen. Murtala Mohammed (posthumous), DIG Chris Omeben, Mr. Taiwo Akinkunmi, Mrs. Margaret Ekpo, Chief Michael Imuodu and many others.
+            <br><br>
+            The year 2010 KARIS award recipient was Chief Gani Fawehinmi, SAN, who was so honoured, though posthumously, for his contributions to the practice of law and the fight for good governance and human rights in Nigeria.""",
+            'image': 'pastor4.jpg'
+        },
+        5: {
+            'text': """It is worthy of note that some of the awardees of the programme have been subsequently recognized by government at various levels. The GRACE programme has several beneficiaries, charity organizations who have become traditional recipients of the charitable disposition of Reverend Chris Okotie and the members of the Household of God Church on an annual basis. 
+            <br><br>
+            They include the Sunshine Foundation, the Pacelli School for the Blind and Partially Sighted, The Little Saints’ Orphanage and The Spinal Cord Injuries Association of Nigeria. Each of these organizations receives five hundred thousand naira from the ministry.
+            <br><br>
+            The Lord Jesus Christ again inspired the television ministry of the Household of God Church, known popularly as Apokalupsis, which was instituted in 1999 to carry the message of the grace of God presented with a balanced biblical perspective beyond the walls of the local assembly to a larger audience both locally and more recently, internationally.""",
+            'image': 'pastor5.jpg'
+        },
+        6: {
+            'text': """The international audience can download messages online, and the live streaming of church services is also in the works.
+            <br><br>
+            The television ministry has received many awards including that from the Nigerian Television Authority network in the year 2002. By 1990, the location of the church in Reverend Chris Okotie’s house could no longer be sustained as membership had grown to several thousands, though two services were being held each Sunday morning.
+            <br><br>
+            The need for the ministry to move to a permanent location had become clear for all to see. After a prolonged search and by divine direction, a run down factory in the Oregun area of Ikeja in Lagos was found and a lease agreement entered into with the owner. The ministry moved in and held its first Sunday service at the newly renovated auditorium on the 19th of December, 1992. The date coincided with the day of GRACE 1992.""",
+            'image': 'pastor6.jpg'
+        },
+        7: {
+            'text': """This site and all the surrounding land in the immediate vicinity thus became a target of faith for Reverend Chris Okotie and the church members and indeed the ministry now owns a vast expanse of land in the area by the grace of the Lord Jesus Christ. 
+            <br><br>
+            In the year 1999, Reverend Chris Okotie once again, with instructions from the Lord Jesus, left Nigeria on a retreat during which he wrote the manuscript of the iconic best selling novel, THE LAST OUTCAST.
+            <br><br>
+            The manuscript was subjected to intense review over a period of time and the finished book was eventually published in 2002 and received rave reviews from all quarters. The novel thus exposed another aspect of Reverend Chris Okotie’s talent and the hand of the Lord Jesus upon him to the general public.""",
+            'image': 'pastor7.png'
+        },
+        8: {
+            'text': """By the grace and provident disposition of the Lord Jesus Christ, the ministry right now is in the process of building a new seven-storey facility to house the Children’s Church, which will be moved out of its present location as soon as the SILVER CITADEL is completed. 
+            <br><br>
+            In November 2005, on receiving a word from the Lord Jesus, the joint celebration of birthdays by members of the church born in the same month of the year was instituted by Reverend Chris Okotie as a means of creating yet another forum for fellowship among members, aside from the several departments in the ministry, which are more administratively based.
+            <br><br>
+            These celebrations have brought out the creativity in the people of the Household of God Church and indeed made the church a lot livelier.""",
+            'image': 'pastor8.jpg'
+        },
+        9: {
+            'text': """These celebrations have brought out the creativity in the people of the Household of God Church and indeed made the church a lot livelier.In the year 2006, the Queen Esther beauty pageant was also created by Reverend Chris Okotie based on an inspiration from the Lord, to project biblical character values for women and to correct the global wrong estimation and perception of feminine beauty as that which is from the outward appearance. 
+            <br><br>
+            The pageant involves ladies who are members of the church dressed as different female characters from the bible, and who are then judged on their representation of such biblical characters and the creativity displayed in their costumes. The pageant has broadened in its conceptualization with each passing year since its inception. The pageant is subsumed in the annual GRACE Programme.
+            <br><br>
+            The KARIS award now carries a cash prize of two million naira.""",
+            'image': 'pastor9.jpg'
+        },
+    }
+    
+    total_pages = len(page_content)
+    current_content = page_content.get(page, page_content[1])
+    
+    context = {
+        'current_page': page,
+        'total_pages': total_pages,
+        'content': current_content['text'],
+        'image': current_content['image'],
+        'has_next': page < total_pages,
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < total_pages else None,
+        'prev_page': page - 1 if page > 1 else None,
+    }
+    
+    return render(request, 'pages/aboutpastor.html', context)
 
 def singles(request):
     return render(request, 'pages/singles.html')
 
 def children(request):
-    return render(request, 'pages/children.html')
+    page = int(request.GET.get('page', 1))
+    
+    page_content = {
+        1: """Jesus spoke these words when His disciples tried to turn back children who had been 
+            brought by their parents to be blessed by Him. Jesus gathered the children to Himself and used their simple trust to demonstrate what pleases God the Father. Jesus loves them and we want them to love and know Him. 
+            <br><br>
+            In The Household of God Church, Jesus is our foundation. Our children's church is therefore not a place where children are kept while adults attend service. Neither is it a place where the children learn a couple of songs and listen to bible stories to keep them busy. Our children's church is a place where our children are taught and instructed in the word of God so they can grow up to know Him and learn how they can live to please Him.
+            <br><br>
+            The gospel is the same no matter the age group. Therefore, our children learn the same bible truths as the adults but in smaller bits and pieces and in simpler language. """,
+        2: """It's a complete service, going from opening prayer to praise and worship, to the word, to offering up to closing prayer and grace. The department is headed by Sis. Bolanle Body-Lawson and accommodates children from birth to fifteen (15) years. The teachers are all volunteers, and are committed members of the Household of God Church. They are people who are born again, speak in tongues, are consistent in church and have sat under the teaching of Rev. Chris Okotie for at least six (6) months. 
+            <br><br>
+            Our children's church is helping to shape the character of our children for the future, and for us teachers, it's a great honour to be working with these children.
+            <br><br>
+            We count ourselves blessed and are thankful to be a part of their lives. CHILDREN'S CHURCH DEPARTMENT was formed in February 1987. We have Approximately 140 members (teachers). We meet every First Saturday of the month"""
+    }
+
+    context = {
+        'current_page': page,
+        'total_pages': len(page_content),
+        'content': page_content.get(page, page_content[1]),
+        'has_next': page < len(page_content),
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < len(page_content) else None,
+        'prev_page': page - 1 if page > 1 else None,
+    }
+    
+    return render(request, 'pages/children.html', context)
 
 def works(request):
     return render(request, 'pages/works.html')
@@ -42,13 +182,69 @@ def holy(request):
     return render(request, 'pages/holy.html')
 
 def technical(request):
-    return render(request, 'pages/technical.html')
+    page = int(request.GET.get('page', 1))
+    
+    page_content = {
+        1: """The Technical Crew as it's fondly called was one of the first few departments to be established shortly after the founding of the Church in 1987. The department was established in 1988 for the purpose of installing and maintaining light fittings as well as other electrical and electronic fittings like Air-conditioners, musical equipment, generators, etc in the church. 
+            <br><br>
+            At the turn of the millennium in year 2000, the functions of the department was further expanded to include the church annual Christmas decorations involving wholesale lighting decoration of all trees in and around the church premises, the fence and the entire street of the Household of God Church.
+            <br><br> 
+            This annual church event serves to physically demonstrate to the world, that Jesus Christ is the Light of the World.The department presently has 35 members who meet every second Saturday at 1.00pm to pray, worship and join faith with members on personal issues of life.""",
+        2: """They also meet regularly to carry out maintenance works in the church as the need arises. The annual Christmas lighting and decorations which commence by the first of October every year practically take all of the time of members as we have to be in church all day, every day to ensure the December first deadline for 'lights-on' is met.
+        <br><br>
+        Pat Otuechere-Obakude as the head of department (HOD), has led the department since 2011 with grace, purposeful leadership and great understanding of member's individuality that pulls together to deliver on the goals and objectives for which the department was established for.We pray for the Lord's divine enablement, strength and wisdom to do that which He has called us to do in his vineyard. 
+        <br><br>
+        As we light up and decorate His house, He will decorate and help our lives to shine for the world to see and glorify His Name. He promised, He will not forget our labour of Love"""
+    }
+
+    context = {
+        'current_page': page,
+        'total_pages': len(page_content),
+        'content': page_content.get(page, page_content[1]),
+        'has_next': page < len(page_content),
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < len(page_content) else None,
+        'prev_page': page - 1 if page > 1 else None,
+    }
+    
+    return render(request, 'pages/technical.html', context)
 
 def villa(request):
     return render(request, 'pages/villa.html')
 
 def pastoral(request):
-    return render(request, 'pages/pastoral.html')
+    page = int(request.GET.get('page', 1))
+    
+    page_content = {
+        1: """The Pastoral Care Department was set up in 1998 from the various Church units that had closely worked with the Pastor. It is structured to meet the needs of the brethren and ensure the proper organization of the specific arms of the ministry. It comes directly under the office of the Pastor of the Church, Rev. Chris Okotie.
+              <br>
+              There are 4 core units which make up the department: <br>
+              <strong>VISITATION</strong> <br>
+              Visitation section is simply VISITATION: To establish PERSONAL CONTACT with members of the local Church. The team relies on requests from needy members and information offered by friends and family who need the attention of the team for fellowship encouragement and prayer support, through the 'I Care' cards.
+              <br><br>
+              <strong>PRAISE & WORSHIP TEAM</strong><br>
+              This section leads the congregation in Praise and Worship to God and our Lord Jesus Christ during services (Sundays and Wednesdays), and during functions like weddings and the Church's annual GRACE Programme.
+              <br>""",
+        2: """<strong>AUDIO/VIDEO CREW SECTION</strong><br>
+              The Audio-Visual Section comprises of the audio-visual crew and the tape ministry. It is responsible for the recording of the Church's sermons on both audio and video and Church's audio and video equipment's for ensuring audibility of the sermon, praise and worship as well as the visual display of activities and lyrics of songs.
+              <br><br>
+              <strong>CHRISTIAN PARENTING CLASS</strong><br>
+              The Christian Parenting Class ministers Biblical principles of good parenting and child upbringing to married couples either believing God for the fruit of the womb or already expectant parents. It also offers physical fitness regimen to help ensure that expectant mothers are fit and strong throughout the duration of their pregnancy.
+              The department which has over 50 listed members meets twice a month: first and third Saturdays, from 12 noon on the Church premises
+              The administrative Head of Department is Miss Ogorchukwu Ogweh. She joined The Household of God International Church on February 1, 1988. She has been a volunteer Church worker for 27 years, out of which time she has led the Pastoral Care Department for 16 years."""
+    }
+
+    context = {
+        'current_page': page,
+        'total_pages': len(page_content),
+        'content': page_content.get(page, page_content[1]),
+        'has_next': page < len(page_content),
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < len(page_content) else None,
+        'prev_page': page - 1 if page > 1 else None,
+    }
+    
+    return render(request, 'pages/pastoral.html', context)
 
 def missions(request):
     return render(request, 'pages/missions.html')
@@ -224,10 +420,31 @@ def add_gallery_images(request, slug):
 
 def event_public_view(request, slug):
     event = get_object_or_404(Event, slug=slug)
-    return render(request, 'pages/event_detail.html', {
+    
+    # Handle description pagination
+    description = event.description
+    page = int(request.GET.get('page', 1))
+    chunk_size = 1300  # Match monthly_event page break size
+    total_pages = (len(description) + chunk_size - 1) // chunk_size
+    
+    # Get the current chunk of text
+    start = (page - 1) * chunk_size
+    end = start + chunk_size
+    current_description = description[start:end]
+    
+    context = {
         'event': event,
-        'gallery': event.gallery.all()
-    })
+        'gallery': event.gallery.all(),
+        'current_description': current_description,
+        'current_page': page,
+        'total_pages': total_pages,
+        'has_next': page < total_pages,
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < total_pages else None,
+        'prev_page': page - 1 if page > 1 else None,
+    }
+    
+    return render(request, 'pages/event_detail.html', context)
 
 def get_event_categories(request):
     queen_esther_events = Event.objects.filter(
@@ -410,30 +627,40 @@ def monthly_event_view(request, event_type, month):
     if not month_num:
         raise Http404("Month not found")
     
-    # Get the current year
     current_year = timezone.now().year
     
-    # Get available years for this event/month combination
     years = MonthlyEvent.objects.filter(
         event_type=event_type,
         month=month_num
     ).values_list('year', flat=True).distinct().order_by('-year')
     
-    # Default to current year or most recent year if available
     selected_year = request.GET.get('year', years.first() or current_year)
     
     try:
-        # Try to get the monthly event
         event = MonthlyEvent.objects.get(
             event_type=event_type,
             month=month_num,
             year=selected_year
         )
         gallery = event.gallery.all().order_by('-date_added')
+        
+        # Handle description pagination
+        description = event.description
+        page = int(request.GET.get('page', 1))
+        chunk_size = 1150
+        total_pages = (len(description) + chunk_size - 1) // chunk_size
+        
+        # Get the current chunk of text
+        start = (page - 1) * chunk_size
+        end = start + chunk_size
+        current_description = description[start:end]
+        
     except MonthlyEvent.DoesNotExist:
-        # If no event exists, provide empty data but render the template
         event = None
         gallery = []
+        current_description = ""
+        total_pages = 1
+        page = 1
     
     context = {
         'event': event,
@@ -442,7 +669,14 @@ def monthly_event_view(request, event_type, month):
         'selected_year': int(selected_year),
         'month_name': month_name[month_num],
         'event_type': event_type,
-        'no_event': event is None  # Flag to indicate if there's no event
+        'no_event': event is None,
+        'current_description': current_description,
+        'current_page': page,
+        'total_pages': total_pages,
+        'has_next': page < total_pages,
+        'has_previous': page > 1,
+        'next_page': page + 1 if page < total_pages else None,
+        'prev_page': page - 1 if page > 1 else None,
     }
     
     return render(request, 'pages/monthly_event.html', context)
@@ -483,3 +717,18 @@ def add_monthly_event_gallery(request, event_id):
         'gallery': event.gallery.all().order_by('-year', '-date_added')
     }
     return render(request, 'admin/monthly_events/add_gallery.html', context)
+
+def weddings(request):
+    return render(request, 'pages/weddings.html')
+
+def baby_dedication(request):
+    return render(request, 'pages/baby_dedication.html')
+
+def christmas(request):
+    return render(request, 'pages/christmas.html')
+
+def church_gallery(request):
+    return render(request, 'pages/church_gallery.html')
+
+def pastor_gallery(request):
+    return render(request, 'pages/pastor_gallery.html')

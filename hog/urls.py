@@ -41,6 +41,11 @@ urlpatterns = [
     path('custom-admin/gallery-image/<int:image_id>/delete/', views.delete_gallery_image, name='delete_gallery_image'),
     path('custom-admin/events/', views.events_list, name='events_list'),
     path('custom-admin/monthly-events/', views.monthly_events_list, name='monthly_events_list'),
+    path('events/weddings/', views.weddings, name='weddings'),
+     path('events/baby_dedication/', views.baby_dedication, name='baby_dedication'),
+     path('events/christmas_light/', views.christmas, name='christmas_light'),
+     path('media/church_gallery/', views.church_gallery, name='church_gallery'),
+     path('media/pastor_gallery/', views.pastor_gallery, name='pastor_gallery'),
     
     # Monthly events routes
     path('custom-admin/monthly-events/', views.monthly_events_list, name='monthly_events_list'),

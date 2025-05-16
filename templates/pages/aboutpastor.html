@@ -1,9 +1,15 @@
-{% extends 'base.html' %} {% load static %} {% block title %}Our Pastor - HOUSEHOLD OF
-GOD CHURCH{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}Our Pastor - HOUSEHOLD OF GOD CHURCH{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
 <div class="hero-section mt-4">
     <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image: url('{% static 'images/ca1.png' %}');">
+        <div class="carousel-item active" style="background-image: url('{% static 'images/ca2.png' %}');">
           <div class="carousel-overlay">
             <p>Welcome to</p>
             <h1>HOUSEHOLD OF GOD CHURCH</h1>
@@ -49,239 +55,176 @@ GOD CHURCH{% endblock %} {% block content %}
     </div>
   </div>
 
-
-  <!-- ABOUT PASTOR SECTION -->
-    <div class="container church-section">
-      <div id="carouselExampleIndicators" class="carousel slide gap-3">
-        <div class="carousel-inner mb-4">
-          <div class="carousel-item active">
-            <div class="row d-flex align-items-stretch church-row">
-              <div class="col-md-5">
-                <div class="w-100 h-100">
-                  <img
-                    src="{% static 'images/ca1.png'%}"
-                    alt="Our Pastor"
-                    class="church-image h-100 w-100 object-fit-cover rounded"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="d-flex flex-column justify-content-center w-100">
-                  <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
-                  <p class="church-text">
-                    The young ministry had its inaugural Sunday morning service on
-                    the 1st of February, 1987 in his living room, then in the Ikeja
-                    area of Lagos state. As membership of the young but peculiar
-                    church grew into the hundreds and thousands, the surrounding
-                    grounds of his house became sitting area for the overspill from
-                    the living room. The ministry of the church and the person of Reverend Chris
-                    Okotie as a minister of the gospel became nationally recognized
-                    when the Lord Jesus Christ inspired the inauguration of the
-                    GRACE PROGRAMME and the television ministry, APOKALUPSIS.
-                    <br /><br />
-
-                    The charity driven GRACE programme was instituted in 1990 and
-                    has become a major benevolence channel of the ministry on an
-                    annual basis. The objective of the programme as directed by the Lord Jesus is to extend the arm of care and sharing to the less privileged in the society through recognized non governmental organizations who deal directly with such people. 
-                    <br> <br>In 1996 the KARIS AWARD, yet another inspiration by the Lord Jesus, which is aimed at appreciating Nigerians who have
-                  </p>
-                </div>
-              </div>
+<!-- ABOUT PASTOR SECTION -->
+<div class="container church-section">
+    <div class="row align-items-stretch">
+        <div class="col-md-5 mb-4 mb-md-0">
+            <div class="image-container h-100">
+                <img src="{% static 'images/'|add:image %}" 
+                     alt="Reverend Chris Okotie" 
+                     class="pastor-image">
             </div>
-          </div>
-
-          <div class="carousel-item">
-            <div class="row d-flex align-items-stretch church-row">
-              <div class="col-md-5">
-                <div class="w-100 h-100">
-                  <img
-                    src="{% static 'images/ca1.png'%}"
-                    alt="Church Building"
-                    class="church-image h-100 w-100 object-fit-cover rounded"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="d-flex flex-column justify-content-center w-100">
-                  <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
-                  <p class="church-text">
-                       positively impacted the nation but have not been recognized by the government, was instituted and subsumed into the GRACE programme. The ministry of the church and the person of Reverend Chris
-                    Okotie as a minister of the gospel became nationally recognized
-                    when the Lord Jesus Christ inspired the inauguration of the
-                    GRACE PROGRAMME and the television ministry, APOKALUPSIS.
-                    <br /><br />
-                    The KARIS award has been given over the years to distinguished Nigerians like Mallam Aminu Kano, Tai Solarin, Hajia Gambo Sawaba, Gen. Murtala Mohammed (posthumous), DIG Chris Omeben, Mr. Taiwo Akinkunmi, Mrs. Margaret Ekpo, Chief Michael Imuodu and many others. The year 2010 KARIS award recipient was Chief Gani Fawehinmi, SAN, who was so honoured, though posthumously for his contributions to the practice of law and the fight for good governance and human rights in Nigeria. It is worthy of note that some of the awardees of the programme have been subsequently recognized by government at various levels. 
-                    
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row d-flex align-items-stretch church-row">
-              <div class="col-md-5">
-                <div class="w-100 h-100">
-                  <img
-                    src="{% static 'images/ca1.png'%}"
-                    alt="Church Building"
-                    class="church-image h-100 w-100 object-fit-cover rounded"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="d-flex flex-column justify-content-center w-100">
-                  <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
-                  <p class="church-text">
-                     The GRACE programme has several beneficiaries, charity organizations who have become traditional recipients of the charitable disposition of Reverend Chris Okotie and the members of the Household of God Church on an annual basis.
-                    <br /><br />
-
-                    They include the Sunshine Foundation, the Pacelli School for the Blind and Partially Sighted, The Little Saints’ Orphanage and The Spinal Cord Injuries Association of Nigeria. Each of these organizations receives five hundred thousand naira from the ministry. The Lord Jesus Christ again inspired the television ministry of the Household of God Church, known popularly as Apokalupsis, which was instituted in 1999 to carry the message of the grace of God presented with a balanced biblical perspective beyond the walls of the local assembly to a larger audience both locally and more recently, internationally. The international audience can download messages online, and the live streaming of church services is also in the works. The television ministry has received many awards including that from the 
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row d-flex align-items-stretch church-row">
-              <div class="col-md-5">
-                <div class="w-100 h-100">
-                  <img
-                    src="{% static 'images/ca1.png'%}"
-                    alt="Church Building"
-                    class="church-image h-100 w-100 object-fit-cover rounded"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="d-flex flex-column justify-content-center w-100">
-                  <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
-                  <p class="church-text">
-                     ...Nigerian Television Authority network in the year 2002. By 1990, the location of the church in Reverend Chris Okotie’s house could no longer be sustained as membership had grown to several thousands, though two services were being held each Sunday morning.
-                    <br /><br />
-
-                    The need for the ministry to move to a permanent location had become clear for all to see. After a prolonged search and by divine direction, a run down factory in the Oregun area of Ikeja in Lagos was found and a lease agreement entered into with the owner. The ministry moved in and held its first Sunday service at the newly renovated auditorium on the 19th of December, 1992. The date coincided with the day of GRACE 1992. This site and all the surrounding land in the immediate vicinity thus became a target of faith for Reverend Chris Okotie and the church members and indeed the ministry now owns a vast expanse of land in the area by the grace of the Lord Jesus Christ.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row d-flex align-items-stretch church-row">
-              <div class="col-md-5">
-                <div class="w-100 h-100">
-                  <img
-                    src="{% static 'images/ca1.png'%}"
-                    alt="Church Building"
-                    class="church-image h-100 w-100 object-fit-cover rounded"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="d-flex flex-column justify-content-center w-100">
-                  <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
-                  <p class="church-text">
-                     In the year 1999, Reverend Chris Okotie once again, with instructions from the Lord Jesus, left Nigeria on a retreat during which he wrote the manuscript of the iconic best selling novel, THE LAST OUTCAST.
-                    <br /><br />
-
-                    The manuscript was subjected to intense review over a period of time and the finished book was eventually published in 2002 and received rave reviews from all quarters. The novel thus exposed another aspect of Reverend Chris Okotie’s talent and the hand of the Lord Jesus upon him to the general public. By the grace and provident disposition of the Lord Jesus Christ, the ministry right now is in the process of building a new seven-storey facility to house the Children’s Church which will be moved out of its present location as soon as the SILVER CITADEL is completed. In November 2005, on receiving a word from the Lord Jesus, the joint celebration of birthdays by members of the church born in the same month of the year was instituted by Reverend Chris Okotie as a means of creating yet another forum for fellowship...
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row d-flex align-items-stretch church-row">
-              <div class="col-md-5">
-                <div class="w-100 h-100">
-                  <img
-                    src="{% static 'images/ca1.png'%}"
-                    alt="Church Building"
-                    class="church-image h-100 w-100 object-fit-cover rounded"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="d-flex flex-column justify-content-center w-100">
-                  <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
-                  <p class="church-text">
-                      ...among members, aside from the several departments in the ministry, which are more administratively based.
-                    <br /><br />
-
-                    These celebrations have brought out the creativity in the people of the Household of God Church and indeed made the church a lot livelier.In the year 2006, the Queen Esther beauty pageant was also created by Reverend Chris Okotie based on an inspiration from the Lord, to project biblical character values for women and to correct the global wrong estimation and perception of feminine beauty as that which is from the outward appearance. The pageant involves ladies who are members of the church dressed as different female characters
-                    from the bible, and who are then judged on their representation of suchbiblical characters and the creativity displayed in their costumes. Thepageant has broadened in its conceptualization with each passing year sinceits inception. The pageant is subsumed in the annual GRACE Programme.
-                    <br>
-                    The KARIS award now carries a cash prize of two million naira....
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+        <div class="col-md-7">
+            <div class="content-container h-100">
+                <h2 class="church-title">Rev Chris Okotie</h2>
+                <p class="church-subtitle">Pastor, Household of God Church</p>
+                <div class="church-text">
+                    {{ content|safe }}
+                </div>
+                
+            </div>
+        </div>
+        {% if total_pages > 1 %}
+                <div class="pagination-container">
+                    <nav aria-label="Pastor biography navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ prev_page }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
 
-        <!-- controls and indicators -->
-        <div class="carousel-custom-navigation d-flex align-items-center justify-content-center">
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
+                            {% for p in total_pages|range_filter %}
+                            <li class="page-item {% if p == current_page %}active{% endif %}">
+                                <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                            </li>
+                            {% endfor %}
 
-          <div class="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              class="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            >1</button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            >2</button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            >3</button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="3"
-              aria-label="Slide 4"
-            >4</button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="4"
-              aria-label="Slide 5"
-            >5</button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="5"
-              aria-label="Slide 6"
-            >6</button>
-          </div>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div> 
-      </div> 
+                            {% if has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ next_page }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    <div class="text-center text-muted small mt-2">
+                        Page {{ current_page }} of {{ total_pages }}
+                    </div>
+                </div>
+                {% endif %}
     </div>
+</div>
 
+<style>
+.church-section {
+    padding: 40px 0;
+}
 
+.image-container {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f8f9fa; 
+}
+
+.pastor-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    padding: 10px; 
+    max-height: 100%;  
+}
+
+.content-container {
+    height: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.church-title {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.church-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.church-text {
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.pagination-container {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+.pagination .page-item {
+    margin: 0 2px;
+}
+
+.pagination .page-link {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        gap: 3px;
+    }
+
+    .pagination .page-link {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .pagination .page-item:not(.active):not(:first-child):not(:last-child) {
+        display: none;
+    }
+
+    .pagination .page-item.active {
+        display: inline-block;
+    }
+
+    .image-container {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        min-height: 450px;
+        margin-bottom: 20px;
+    }
+    
+    .pastor-image {
+        padding: 5px;
+    }
+
+    .content-container {
+        height: auto;
+    }
+
+    .pagination-container {
+        padding: 15px 10px;
+    }
+}
+</style>
 {% endblock %}

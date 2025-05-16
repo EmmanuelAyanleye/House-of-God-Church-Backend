@@ -1,9 +1,9 @@
-{% extends 'base.html' %} {% load static %} {% block title %}Our Church - HOUSEHOLD OF
+{% extends 'base.html' %} {% load static %} {% load custom_tags %} {% block title %}Our Church - HOUSEHOLD OF
 GOD CHURCH{% endblock %} {% block content %}
 <div class="hero-section mt-4">
     <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image: url('{% static 'images/ca1.png' %}');">
+        <div class="carousel-item active" style="background-image: url('{% static 'images/ca2.png' %}');">
           <div class="carousel-overlay">
             <p>Welcome to</p>
             <h1>HOUSEHOLD OF GOD CHURCH</h1>
@@ -55,19 +55,51 @@ GOD CHURCH{% endblock %} {% block content %}
     <div class="row align-items-stretch church-row">
       <div class="col-md-5 d-flex">
         <div class="w-100 h-100">
-          <img src="{% static 'images/ca1.png' %}" alt="Church Building" class="church-image h-100 w-100 object-fit-cover rounded">
+          <img src="{% static 'images/church.png' %}" alt="Church Building" class="church-image h-100 w-100 object-fit-cover rounded">
         </div>
       </div>
       <div class="col-md-6 d-flex">
         <div class="d-flex flex-column justify-content-center w-100">
-          <h2 class="church-title">The Household Of God International Ministries</h2>
-          <p class="church-text">
-            The young ministry had its inaugural Sunday morning service on the 1st of February, 1987 in his living room, then in the Ikeja area of Lagos state. As membership of the young but peculiar church grew into the hundreds and thousands, the surrounding grounds of his house became sitting area for the overspill from the living room. 
-            <br><br>
-            The ministry of the church and the person of Reverend Chris Okotie as a minister of the gospel became nationally recognized when the Lord Jesus Christ inspired the inauguration of the GRACE PROGRAMME and the television ministry, APOKALUPSIS.
-          </p>
+          <h2 class="church-title pb-4">The Household Of God International Ministries</h2>
+          <div class="church-text">
+            {{ content|safe }}
+            
+          </div>
         </div>
       </div>
+
+            {% if total_pages > 1 %}
+            <div class="pagination-container">
+                <nav aria-label="Church history navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ prev_page }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for p in total_pages|range_filter %}
+                        <li class="page-item {% if p == current_page %}active{% endif %}">
+                            <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ next_page }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <div class="text-center text-muted small mt-2">
+                    Page {{ current_page }} of {{ total_pages }}
+                </div>
+            </div>
+            {% endif %}
     </div>
   </div>
 

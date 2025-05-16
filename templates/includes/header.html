@@ -173,8 +173,8 @@
                   {% endfor %}
                 </ul>
               </li>
-              <li><a class="dropdown-item" href="#">Baby Dedication</a></li>
-              <li><a class="dropdown-item" href="#">Weddings</a></li>
+              <li><a class="dropdown-item" href="{% url 'baby_dedication' %}">Baby Dedication</a></li>
+              <li><a class="dropdown-item" href="{% url 'weddings' %}">Weddings</a></li>
               <li class="dropdown-submenu">
                 <a class="dropdown-item" href="#">Queen Esther</a>
                 <ul class="dropdown-menu">
@@ -213,7 +213,7 @@
                   {% endfor %}
                 </ul>
               </li>
-              <li><a class="dropdown-item" href="#">Christmas Lights</a></li>
+              <li><a class="dropdown-item" href="{% url 'christmas_light' %}">Christmas Lights</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -225,8 +225,8 @@
               >Media</a
             >
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Church Gallery</a></li>
-              <li><a class="dropdown-item" href="#">Pastor's Gallery</a></li>
+              <li><a class="dropdown-item" href="{% url 'church_gallery' %}">Church Gallery</a></li>
+              <li><a class="dropdown-item" href="{% url 'pastor_gallery' %}">Pastor's Gallery</a></li>
               <li><a class="dropdown-item" href="#">Music</a></li>
             </ul>
           </li>
