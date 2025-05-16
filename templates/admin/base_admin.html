@@ -53,6 +53,18 @@
           <a class="nav-item nav-link" href="{% url 'monthly_events_list' %}"
             >Monthly Events</a
           >
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Galleries
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'admin_gallery' 'christmas-light' %}">Christmas Light</a></li>
+              <li><a class="dropdown-item" href="{% url 'admin_gallery' 'baby-dedication' %}">Baby Dedication</a></li>
+              <li><a class="dropdown-item" href="{% url 'admin_gallery' 'weddings' %}">Weddings</a></li>
+              <li><a class="dropdown-item" href="{% url 'admin_gallery' 'pastor-gallery' %}">Pastor's Gallery</a></li>
+              <li><a class="dropdown-item" href="{% url 'admin_gallery' 'church-gallery' %}">Church Gallery</a></li>
+            </ul>
+          </div>
           <div class="border-start ms-2 ps-2">
             <!-- Add separator -->
             <a href="{% url 'index' %}" class="nav-link">View Site</a>

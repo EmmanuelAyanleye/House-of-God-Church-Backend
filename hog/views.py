@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, Http404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .models import Event, EventGallery, MonthlyEvent, MonthlyEventGallery, EventCategory
+from .models import Event, EventGallery, GalleryCategory, GalleryImage, MonthlyEvent, MonthlyEventGallery, EventCategory
 from .forms import EventForm, EventGalleryForm, MonthlyEventForm, MonthlyEventGalleryForm  # Add this line
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -13,6 +13,7 @@ from django.db.models import Max, Count
 from django.utils.text import slugify
 from calendar import month_name
 from itertools import groupby
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def index(request):
     return render(request, 'pages/index.html')
@@ -719,16 +720,139 @@ def add_monthly_event_gallery(request, event_id):
     return render(request, 'admin/monthly_events/add_gallery.html', context)
 
 def weddings(request):
-    return render(request, 'pages/weddings.html')
+    page = request.GET.get('page', 1)
+    images = GalleryImage.objects.filter(category__slug='weddings').order_by('-date_added')
+    
+    paginator = Paginator(images, 28)  # Show 28 images per page
+    try:
+        gallery_images = paginator.page(page)
+    except PageNotAnInteger:
+        gallery_images = paginator.page(1)
+    except EmptyPage:
+        gallery_images = paginator.page(paginator.num_pages)
+    
+    context = {
+        'gallery_images': gallery_images,
+        'category_name': 'WEDDINGS'
+    }
+    return render(request, 'pages/weddings.html', context)
 
 def baby_dedication(request):
-    return render(request, 'pages/baby_dedication.html')
+    page = request.GET.get('page', 1)
+    images = GalleryImage.objects.filter(category__slug='baby-dedication').order_by('-date_added')
+    
+    paginator = Paginator(images, 28)
+    try:
+        gallery_images = paginator.page(page)
+    except PageNotAnInteger:
+        gallery_images = paginator.page(1)
+    except EmptyPage:
+        gallery_images = paginator.page(paginator.num_pages)
+    
+    context = {
+        'gallery_images': gallery_images,
+        'category_name': 'BABY DEDICATION'
+    }
+    return render(request, 'pages/baby_dedication.html', context)
 
 def christmas(request):
-    return render(request, 'pages/christmas.html')
+    page = request.GET.get('page', 1)
+    images = GalleryImage.objects.filter(category__slug='christmas-light').order_by('-date_added')
+    
+    paginator = Paginator(images, 28)
+    try:
+        gallery_images = paginator.page(page)
+    except PageNotAnInteger:
+        gallery_images = paginator.page(1)
+    except EmptyPage:
+        gallery_images = paginator.page(paginator.num_pages)
+    
+    context = {
+        'gallery_images': gallery_images,
+        'category_name': 'HOG CHRISTMAS LIGHT EDITION'
+    }
+    return render(request, 'pages/christmas.html', context)
 
 def church_gallery(request):
-    return render(request, 'pages/church_gallery.html')
+    page = request.GET.get('page', 1)
+    images = GalleryImage.objects.filter(category__slug='church-gallery').order_by('-date_added')
+    
+    paginator = Paginator(images, 28)
+    try:
+        gallery_images = paginator.page(page)
+    except PageNotAnInteger:
+        gallery_images = paginator.page(1)
+    except EmptyPage:
+        gallery_images = paginator.page(paginator.num_pages)
+    
+    context = {
+        'gallery_images': gallery_images,
+        'category_name': 'CHURCH GALLERY'
+    }
+    return render(request, 'pages/church_gallery.html', context)
 
 def pastor_gallery(request):
-    return render(request, 'pages/pastor_gallery.html')
+    page = request.GET.get('page', 1)
+    images = GalleryImage.objects.filter(category__slug='pastor-gallery').order_by('-date_added')
+    
+    paginator = Paginator(images, 28)
+    try:
+        gallery_images = paginator.page(page)
+    except PageNotAnInteger:
+        gallery_images = paginator.page(1)
+    except EmptyPage:
+        gallery_images = paginator.page(paginator.num_pages)
+    
+    context = {
+        'gallery_images': gallery_images,
+        'category_name': "PASTOR'S GALLERY"
+    }
+    return render(request, 'pages/pastor_gallery.html', context)
+
+@login_required
+def gallery_dashboard(request, category_slug):
+    category = get_object_or_404(GalleryCategory, slug=category_slug)
+    page = request.GET.get('page', 1)
+    images = category.images.all()
+    
+    # Pagination - 28 images per page
+    paginator = Paginator(images, 28)
+    try:
+        gallery_images = paginator.page(page)
+    except PageNotAnInteger:
+        gallery_images = paginator.page(1)
+    except EmptyPage:
+        gallery_images = paginator.page(paginator.num_pages)
+
+    context = {
+        'category': category,
+        'images': gallery_images,
+    }
+    return render(request, 'admin/gallery/dashboard.html', context)
+
+@login_required
+def add_gallery_images(request, category_slug):
+    category = get_object_or_404(GalleryCategory, slug=category_slug)
+    
+    if request.method == 'POST':
+        images = request.FILES.getlist('images')
+        for image in images:
+            GalleryImage.objects.create(
+                category=category,
+                image=image
+            )
+        messages.success(request, 'Images uploaded successfully')
+        return redirect('admin_gallery', category_slug=category_slug)
+    
+    return render(request, 'admin/gallery/upload.html', {'category': category})
+
+@login_required
+def delete_gallery_image(request, image_id):
+    image = get_object_or_404(GalleryImage, id=image_id)
+    category_slug = image.category.slug
+    
+    if request.method == 'POST':
+        image.delete()
+        messages.success(request, 'Image deleted successfully')
+    
+    return redirect('admin_gallery', category_slug=category_slug)

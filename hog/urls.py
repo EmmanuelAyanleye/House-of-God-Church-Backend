@@ -74,4 +74,9 @@ urlpatterns = [
          views.monthly_event_view,
          kwargs={'event_type': 'Hallelujah Party'},
          name='hallelujah_party'),
+
+     # Gallery admin routes
+     path('custom-admin/gallery/<slug:category_slug>/', views.gallery_dashboard, name='admin_gallery'),
+     path('custom-admin/gallery/<slug:category_slug>/upload/', views.add_gallery_images, name='admin_gallery_upload'),
+     path('custom-admin/gallery/image/<int:image_id>/delete/', views.delete_gallery_image, name='admin_gallery_delete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

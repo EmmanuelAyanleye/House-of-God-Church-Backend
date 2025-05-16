@@ -2,9 +2,8 @@
 {% load static %}
 
 {% block title %}
-{{ event_type }} - HOUSEHOLD OF GOD CHURCH
+{{ category_name }} - HOUSEHOLD OF GOD CHURCH
 {% endblock %}
-
 
 {% block content %}
 <!-- HERO SECTION -->
@@ -49,46 +48,65 @@
 </div>
 
 <!-- THE DEPARTMENT -->
-    <div class="container church-section">
-      <h2 class="church-title text-center">BABY DEDICATION GALLERY</h2>
-      <div class="container py-4">
+<div class="container church-section">
+    <h2 class="church-title text-center">{{ category_name }}</h2>
+    <div class="container py-4">
         <div class="row g-4">
-          <div class="col-6 col-md-3">
-            <img src="{% static 'images/ca1.png'%}" data-full="{% static 'images/ca1.png'%}" alt="Image 1" class="gallery-img">
-          </div>
-          <div class="col-6 col-md-3">
-            <img src="{% static 'images/ca3.png'%}" data-full="{% static 'images/ca3.png'%}" alt="Image 2" class="gallery-img">
-          </div>
-          <div class="col-6 col-md-3">
-            <img src="{% static 'images/pastor.jpg'%}" data-full="{% static 'images/pastor.jpg'%}" alt="Image 3" class="gallery-img">
-          </div>
-          <div class="col-6 col-md-3">
-            <img src="{% static 'images/ca1.png'%}" data-full="{% static 'images/ca1.png'%}" alt="Image 4" class="gallery-img">
-          </div>
+            {% for image in gallery_images %}
+            <div class="col-6 col-md-3">
+                <img src="{{ image.image.url }}" 
+                     data-full="{{ image.image.url }}" 
+                     alt="{{ image.caption|default:category_name }}" 
+                     class="gallery-img">
+            </div>
+            {% endfor %}
         </div>
-      </div>
 
-      <!-- Overlay -->
-        <div class="overlay" id="lightbox">
+        {% if gallery_images.paginator.num_pages > 1 %}
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if gallery_images.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ gallery_images.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                
+                {% for num in gallery_images.paginator.page_range %}
+                <li class="page-item {% if num == gallery_images.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                
+                {% if gallery_images.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ gallery_images.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="lightbox">
         <img id="lightbox-img" src="" alt="Lightbox Image">
         <div class="controls">
             <button class="btn btn-outline-light" onclick="prevImage()" title="Previous">
-            <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left"></i>
             </button>
             <a class="btn btn-outline-light" id="downloadBtn" download target="_blank" title="Download">
-            <i class="fas fa-download"></i>
+                <i class="fas fa-download"></i>
             </a>
             <button class="btn btn-outline-light" onclick="nextImage()" title="Next">
-            <i class="fas fa-chevron-right"></i>
+                <i class="fas fa-chevron-right"></i>
             </button>
             <button class="btn btn-outline-light" onclick="closeLightbox()" title="Close">
-            <i class="fas fa-times"></i>
+                <i class="fas fa-times"></i>
             </button>
         </div>
-        </div>
+    </div>
 
-
-        <script>
+    <script>
         const images = document.querySelectorAll('.gallery-img');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -98,8 +116,8 @@
 
         images.forEach((img, index) => {
             img.addEventListener('click', () => {
-            currentIndex = index;
-            showImage(img.dataset.full);
+                currentIndex = index;
+                showImage(img.dataset.full);
             });
         });
 
@@ -129,6 +147,6 @@
             if (e.key === 'ArrowRight') nextImage();
             if (e.key === 'ArrowLeft') prevImage();
         });
-        </script>
-    </div>
+    </script>
+</div>
 {% endblock %}
