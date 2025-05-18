@@ -3,7 +3,9 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from hog import views
+from .views import contact_view, admin_messages_view
 
+from hog.views import admin_messages_view 
 urlpatterns = [
     # Public routes
     path('', views.index, name='index'),
@@ -79,4 +81,14 @@ urlpatterns = [
      path('custom-admin/gallery/<slug:category_slug>/', views.gallery_dashboard, name='admin_gallery'),
      path('custom-admin/gallery/<slug:category_slug>/upload/', views.add_gallery_images, name='admin_gallery_upload'),
      path('custom-admin/gallery/image/<int:image_id>/delete/', views.delete_gallery_image, name='admin_gallery_delete'),
+     path('watch/', views.watch, name='watch'),
+     path('custom-admin/sermons/add/', views.add_sermon, name='add_sermon'),
+     path('sermon/<int:sermon_id>/like/', views.sermon_like, name='sermon_like'),
+     path("contact/", contact_view, name="contact"),
+     path("custom-admin/messages/", admin_messages_view, name="admin_messages"),
+     
+    path('custom-admin/messages/<int:pk>/', views.message_detail, name='message_detail'),
+    path('custom-admin/messages/<int:pk>/delete/', views.message_delete, name='message_delete'),
+    
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

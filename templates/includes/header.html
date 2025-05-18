@@ -12,7 +12,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a
-              class="nav-link active"
+              class="nav-link"
               aria-current="page"
               href="{% url 'index' %}"
               >Home</a
@@ -227,14 +227,47 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'church_gallery' %}">Church Gallery</a></li>
               <li><a class="dropdown-item" href="{% url 'pastor_gallery' %}">Pastor's Gallery</a></li>
+              <li><a class="dropdown-item" href="{% url 'watch' %}">Watch Sermon</a></li>
               <li><a class="dropdown-item" href="#">Music</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact-section">Contact Us</a>
+            <a class="nav-link" href="{% url 'index' %}#contact-section">Contact Us</a>
+
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
+
+<style>
+  .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+  }
+
+  .navbar-nav .nav-link:hover, 
+  .navbar-nav .nav-link.active, 
+  .navbar-nav .dropdown-menu .dropdown-item.active {
+    color: gold !important;
+  }
+
+  .dropdown-menu .dropdown-item:hover {
+    color: gold !important;
+    background-color: transparent !important;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link, .dropdown-menu .dropdown-item");
+    const currentUrl = window.location.pathname + window.location.hash;
+
+    navLinks.forEach(link => {
+      if (link.getAttribute("href") === currentUrl || link.getAttribute("href") === window.location.hash) {
+        link.classList.add("active");
+      }
+    });
+  });
+</script>

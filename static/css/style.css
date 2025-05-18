@@ -159,6 +159,11 @@ body {
   .hero-section .carousel-item {
     height: 60vh;
   }
+
+  iframe {
+    height: 20rem !important;
+  }
+
   .carousel-overlay h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -196,7 +201,7 @@ body {
   color: #000;
 }
 
-.church-subtitle{
+.church-subtitle {
   font-weight: 400;
   margin-bottom: 20px;
 }
@@ -448,7 +453,7 @@ body {
 
 .programme-icon {
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-top: 0.8rem;
   text-align: left;
 }
 
@@ -567,7 +572,6 @@ body {
 .form-group i {
   position: absolute;
   top: 50%;
-  left: 1rem;
   transform: translateY(-50%);
   color: gold;
   font-size: 1rem;
@@ -599,7 +603,7 @@ textarea.form-control {
 .contact-info i {
   color: gold;
   font-size: 1.2rem;
-  margin-right: 0.5rem;
+  margin-right: 0.3rem;
 }
 
 .btn-custom {
@@ -638,7 +642,7 @@ textarea.form-control {
 
 .footer .btn-subscribe {
   background-color: gold;
-  color: #fff;
+  color: #000 !important;
 }
 
 .footer .btn-subscribe:hover {
@@ -792,36 +796,76 @@ textarea.form-control {
 
 /* PAGINATION */
 .description-section {
-    position: relative;
-    padding: 20px;
+  position: relative;
+  padding: 20px;
 }
 
 .description-content {
-    min-height: 300px;
+  min-height: 300px;
 }
 
 .pagination-container {
-    border-top: 1px solid #eee;
-    padding-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
 }
 
 .pagination .page-link {
-    color: gold;
-    border-color: gold;
+  color: gold;
+  border-color: gold;
 }
 
 .pagination .page-item.active .page-link {
-    background-color: gold;
-    border-color: gold;
-    color: #000; 
+  background-color: gold;
+  border-color: gold;
+  color: #000;
 }
 
 .pagination .page-link:hover {
-    background-color: gold;
-    border-color: gold;
-    color: #000;
+  background-color: gold;
+  border-color: gold;
+  color: #000;
 }
 
 .pagination .page-link:focus {
-    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);  
+  box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+}
+
+/* SOCIAL MEDIA ICONS STYLING */
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons a {
+  color: #929292;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: gold;
+}
+
+.countdown {
+  font-size: 10px;
+  animation: pulse 1s infinite;
+  padding-inline: 3px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    color: #fff;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #ffd700;
+  }
+}
+
+.ytp-share-button-visible, 
+.ytp-share-button {
+  display: none !important;
+  visibility: hidden !important;
 }

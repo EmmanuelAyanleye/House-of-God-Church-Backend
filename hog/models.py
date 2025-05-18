@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class EventCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -112,3 +113,41 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return f"{self.category.name} - {self.date_added.strftime('%Y-%m-%d')}"
+
+class Sermon(models.Model):
+    title = models.CharField(max_length=200)
+    youtube_url = models.URLField()
+    date_posted = models.DateField(default=timezone.now)
+    description = models.TextField()
+    thumbnail = models.ImageField(upload_to='sermons/thumbnails/', null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='sermon_likes', blank=True)
+    dislikes = models.ManyToManyField(User, related_name='sermon_dislikes', blank=True)
+    
+    class Meta:
+        ordering = ['-date_posted']
+
+    def __str__(self):
+        return self.title
+
+    def total_likes(self):
+        return self.likes.count()
+
+    def total_dislikes(self):
+        return self.dislikes.count()
+
+
+
+
+
+
+# contact database
+
+class Message(models.Model):
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    date_sent = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.full_name} - {self.subject}"

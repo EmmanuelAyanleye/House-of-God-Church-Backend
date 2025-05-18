@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, Http404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .models import Event, EventGallery, GalleryCategory, GalleryImage, MonthlyEvent, MonthlyEventGallery, EventCategory
-from .forms import EventForm, EventGalleryForm, MonthlyEventForm, MonthlyEventGalleryForm  # Add this line
+from .models import Event, EventGallery, GalleryCategory, GalleryImage, MonthlyEvent, MonthlyEventGallery, EventCategory, Sermon
+from .forms import EventForm, EventGalleryForm, MonthlyEventForm, MonthlyEventGalleryForm, SermonForm  # Add this line
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from urllib.parse import unquote
@@ -12,11 +12,67 @@ from django.utils import timezone
 from django.db.models import Max, Count
 from django.utils.text import slugify
 from calendar import month_name
+from datetime import datetime
 from itertools import groupby
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import random
+from .models import Sermon
+
+from django.shortcuts import render
+from django.utils import timezone
+import pytz
+from .models import Message 
+from django.contrib import messages as django_messages
+# Define the target date (February 1)
+WAT = pytz.timezone('Africa/Lagos')
+
+from django.utils import timezone
+
+WAT = timezone.get_fixed_timezone(+1)  # West Africa Time
+
+PROGRAM_BASE_NUMBER = 38  # Base program number for Household
+
+# Function to calculate the next weekday date
+def get_next_weekday(target_weekday):
+    now = timezone.now().astimezone(WAT)
+    days_ahead = (target_weekday - now.weekday()) % 7
+    return now + timezone.timedelta(days=days_ahead)
 
 def index(request):
-    return render(request, 'pages/index.html')
+    now = timezone.now().astimezone(WAT)
+    target_date = timezone.datetime(now.year, 2, 1, 0, 0, 0, tzinfo=WAT)
+
+    # Adjust for past February (move to next year)
+    if now > target_date:
+        target_date = timezone.datetime(now.year + 1, 2, 1, 0, 0, 0, tzinfo=WAT)
+
+    # Calculate the program number increment
+    program_number = PROGRAM_BASE_NUMBER + (now.year - 2025)
+
+    if now.date() == target_date.date():
+        countdown = "It's the day! 🎉"
+        is_today = True
+    else:
+        delta = target_date - now
+        countdown = f"{delta.days} days, {delta.seconds // 3600} hours, {(delta.seconds % 3600) // 60} minutes"
+        is_today = False
+
+    # Calculate next Wednesday and next Sunday
+    next_wednesday = get_next_weekday(2)  # Wednesday is 2 (0 = Monday)
+    next_sunday = get_next_weekday(6)  # Sunday is 6
+
+    random_sermons = Sermon.objects.order_by('?')[:4]
+
+    context = {
+        'countdown': countdown,
+        'is_today': is_today,
+        'program_number': program_number,
+        'next_wednesday': next_wednesday,
+        'next_sunday': next_sunday,
+        'random_sermons': random_sermons
+    }
+
+    return render(request, 'pages/index.html', context)
 
 def our_church(request):
     page = int(request.GET.get('page', 1))
@@ -856,3 +912,153 @@ def delete_gallery_image(request, image_id):
         messages.success(request, 'Image deleted successfully')
     
     return redirect('admin_gallery', category_slug=category_slug)
+
+def add_sermon(request):
+    if request.method == 'POST':
+        form = SermonForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Sermon added successfully!")
+            return redirect('add_sermon')  # Redirects to the same page
+        else:
+            messages.error(request, "There was an error adding the sermon.")
+    else:
+        form = SermonForm()
+        
+    return render(request, 'admin/add_sermon.html', {'form': form})
+
+def watch(request):
+    # Get all sermons
+    all_sermons = list(Sermon.objects.all())
+    
+    if not all_sermons:
+        # Handle case when no sermons exist
+        return render(request, 'pages/watch.html', {
+            'sermon': None,
+            'more_sermons': [],
+            'error_message': 'No sermons available'
+        })
+
+    # Get specific sermon or random one
+    sermon_id = request.GET.get('id')
+    if sermon_id:
+        sermon = get_object_or_404(Sermon, id=sermon_id)
+    else:
+        sermon = random.choice(all_sermons)
+
+    # Get other sermons for "Watch More" section
+    other_sermons = [s for s in all_sermons if s.id != sermon.id]
+    random.shuffle(other_sermons)
+
+    # Paginate other sermons
+    paginator = Paginator(other_sermons, 8)  # Show 8 sermons per page
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'sermon': sermon,
+        'more_sermons': page_obj,
+    }
+    
+    return render(request, 'pages/watch.html', context)
+
+def sermon_action(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'Login required'}, status=401)
+        
+    sermon_id = request.POST.get('sermon_id')
+    action_type = request.POST.get('type')
+    
+    sermon = get_object_or_404(Sermon, id=sermon_id)
+    
+    if action_type == 'like':
+        if request.user in sermon.dislikes.all():
+            sermon.dislikes.remove(request.user)
+        if request.user in sermon.likes.all():
+            sermon.likes.remove(request.user)
+        else:
+            sermon.likes.add(request.user)
+    elif action_type == 'dislike':
+        if request.user in sermon.likes.all():
+            sermon.likes.remove(request.user)
+        if request.user in sermon.dislikes.all():
+            sermon.dislikes.remove(request.user)
+        else:
+            sermon.dislikes.add(request.user)
+            
+    return JsonResponse({
+        'likes': sermon.total_likes(),
+        'dislikes': sermon.total_dislikes(),
+        'user_action': action_type if request.user in (sermon.likes.all() if action_type == 'like' else sermon.dislikes.all()) else None
+    })
+
+def sermon_like(request, sermon_id):
+    sermon = get_object_or_404(Sermon, id=sermon_id)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        session_key = f'sermon_{sermon_id}_voted'
+        if not request.session.get(session_key):
+            if action == 'like':
+                sermon.likes += 1
+            elif action == 'dislike':
+                sermon.dislikes += 1
+            sermon.save()
+            request.session[session_key] = True
+        return JsonResponse({'likes': sermon.likes, 'dislikes': sermon.dislikes})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+
+
+
+
+# contact view 
+ # Make sure to import the Message model
+
+def contact_view(request):
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+
+        # Save the message to the database
+        Message.objects.create(
+            full_name=full_name,
+            email=email,
+            subject=subject,
+            message=message
+        )
+
+        messages.success(request, "Your message has been sent successfully!")
+        return redirect("index")  # Redirect to the homepage after submission
+
+    return render(request, "pages/index.html")
+
+
+
+
+
+
+# admin conatct us 
+@login_required
+def admin_messages_view(request):
+    messages = Message.objects.all().order_by('-created_at')
+    return render(request, 'admin/contact_us.html', {'messages': messages})
+
+    
+# admin message detail and delete view
+def message_detail(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    return render(request, 'hog/message_detail.html', {'message': message})
+
+# admin message delete view
+def message_delete(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    if request.method == 'POST':
+        message.delete()
+        django_messages.success(request, 'Message deleted successfully.')
+        return redirect('/custom-admin/messages/?deleted=true')  # Using query param for toast trigger
+    
+    return render(request, 'hog/message_confirm_delete.html', {'message': message})

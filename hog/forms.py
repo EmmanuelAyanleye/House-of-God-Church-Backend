@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from .models import Event, EventGallery, EventCategory, MonthlyEvent, MonthlyEventGallery
+from .models import Event, EventGallery, EventCategory, MonthlyEvent, MonthlyEventGallery, Sermon
 from .widgets import MultipleFileInput
 
 class EventForm(forms.ModelForm):
@@ -76,3 +76,8 @@ class MonthlyEventGalleryForm(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'form-control'}),
         initial=timezone.now().year
     )
+
+class SermonForm(forms.ModelForm):
+    class Meta:
+        model = Sermon
+        fields = ['youtube_url', 'title', 'date_posted', 'description']
