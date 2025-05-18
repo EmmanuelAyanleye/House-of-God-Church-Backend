@@ -36,7 +36,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto gap-3">
             <li class="nav-item"><a class="nav-link" href="{% url 'admin_dashboard' %}">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'add_sermon' %}">Sermon</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'events_list' %}">Category Events</a></li>
@@ -51,8 +51,17 @@
                 <li><a class="dropdown-item" href="{% url 'admin_gallery' 'church-gallery' %}">Church Gallery</a></li>
                 
               </ul>
+            </li><li class="nav-item">
+                <a class="nav-link position-relative" href="{% url 'admin_messages' %}">
+                    New Messages
+                    {% if unread_count > 0 %}
+                    <span class="position-absolute top-3 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ unread_count }}
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                    {% endif %}
+                </a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'admin_messages' %}">Admin Messages</a></li>
             
             <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">View Site</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'admin_logout' %}">Logout</a></li>

@@ -42,3 +42,12 @@ def events_processor(request):
             'GRACE': Event.objects.filter(category__name='G.R.A.C.E').order_by('-year'),
         }
     }
+
+from .models import Message
+
+def unread_messages_count(request):
+    if request.user.is_authenticated:
+        return {
+            'unread_count': Message.objects.filter(is_read=False).count()
+        }
+    return {}

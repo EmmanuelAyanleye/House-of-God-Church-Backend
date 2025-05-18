@@ -1007,12 +1007,6 @@ def sermon_like(request, sermon_id):
         return JsonResponse({'likes': sermon.likes, 'dislikes': sermon.dislikes})
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
-
-
-
-
-
-
 # contact view 
  # Make sure to import the Message model
 
@@ -1045,8 +1039,24 @@ def contact_view(request):
 @login_required
 def admin_messages_view(request):
     messages = Message.objects.all().order_by('-created_at')
-    return render(request, 'admin/contact_us.html', {'messages': messages})
+    unread_count = Message.objects.filter(is_read=False).count()
+    return render(request, 'admin/contact_us.html', {
+        'messages': messages,
+        'unread_count': unread_count
+    })
 
+@login_required
+def mark_message_as_read(request, pk):
+    message = get_object_or_404(Message, pk=pk)
+    if request.method == 'POST':
+        if not message.is_read:
+            message.is_read = True
+            message.save()
+            django_messages.success(request, 'Message marked as read.')
+        return redirect('admin_messages')  # Make sure this matches your URL name
+    
+    # If not POST, redirect anyway
+    return redirect('admin_messages')
     
 # admin message detail and delete view
 def message_detail(request, pk):

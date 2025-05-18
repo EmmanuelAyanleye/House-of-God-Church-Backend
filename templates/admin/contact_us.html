@@ -4,42 +4,66 @@
 {% block content %}
 <div class="container mt-5">
   <h2 class="mb-4">Messages from Contact Form</h2>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Subject</th>
-        <th>Message</th>
-        <th>Date Sent</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for message in messages %}
-      <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ message.full_name }}</td>
-        <td>{{ message.email }}</td>
-        <td>{{ message.subject }}</td>
-        <td>
-          {{ message.message|truncatechars:50 }} 
-          {% if message.message|length > 50 %}...{% endif %}
-        </td>
-        <td>{{ message.created_at }}</td>
-        <td>
-          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewMessageModal" data-id="{{ message.id }}" data-fullname="{{ message.full_name }}" data-email="{{ message.email }}" data-subject="{{ message.subject }}" data-message="{{ message.message }}" data-date="{{ message.created_at }}">View</button>
-          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMessageModal" data-id="{{ message.id }}" data-fullname="{{ message.full_name }}" data-subject="{{ message.subject }}">Delete</button>
-        </td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="7" class="text-center">No messages yet.</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="table-responsive-lg" style="display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table class="table table-bordered" style="min-width: 992px;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Date Sent</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for message in messages %}
+        <tr {% if not message.is_read %}class="fw-bold"{% endif %}>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ message.full_name }}</td>
+          <td>{{ message.email }}</td>
+          <td>{{ message.subject }}</td>
+          <td>
+            {{ message.message|truncatechars:50 }} 
+            {% if message.message|length > 20 %}{% endif %}
+          </td>
+          <td>{{ message.created_at }}</td>
+          <td>
+            {% if message.is_read %}
+              <span class="badge bg-secondary">Read</span>
+            {% else %}
+              <span class="badge bg-primary">Unread</span>
+            {% endif %}
+          </td>
+          <td class="d-flex gap-2">
+            <button class="btn btn-primary btn-sm" 
+          data-bs-toggle="modal" 
+          data-bs-target="#viewMessageModal" 
+          data-id="{{ message.id }}" 
+          data-fullname="{{ message.full_name }}" 
+          data-email="{{ message.email }}" 
+          data-subject="{{ message.subject }}" 
+          data-message="{{ message.message }}" 
+          data-date="{{ message.created_at }}"
+          data-isread="{{ message.is_read|yesno:'true,false' }}">
+            View
+          </button>
+            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteMessageModal" 
+                    data-id="{{ message.id }}" 
+                    data-fullname="{{ message.full_name }}" 
+                    data-subject="{{ message.subject }}">Delete</button>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8" class="text-center">No messages yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <!-- View Message Modal -->
@@ -51,12 +75,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <p><strong>Status:</strong> <span id="viewStatus" class="badge"></span></p>
         <p><strong>Full Name:</strong> <span id="viewFullName"></span></p>
         <p><strong>Email:</strong> <span id="viewEmail"></span></p>
         <p><strong>Subject:</strong> <span id="viewSubject"></span></p>
         <p><strong>Message:</strong></p>
         <p id="viewMessage"></p>
         <p><strong>Date Sent:</strong> <span id="viewDate"></span></p>
+      </div>
+      <div class="modal-footer">
+        <form method="post" id="markAsReadForm" action="" class="d-flex gap-2">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary" id="markAsReadBtn">Mark as Read</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </form>
       </div>
     </div>
   </div>
@@ -139,5 +171,35 @@
     document.getElementById('deleteSubject').innerText = button.getAttribute('data-subject');
     document.getElementById('deleteMessageForm').action = '/custom-admin/messages/' + messageId + '/delete/';
   });
+
+  document.getElementById('viewMessageModal').addEventListener('show.bs.modal', function(event) {
+  const button = event.relatedTarget;
+  const messageId = button.getAttribute('data-id');
+  
+  // Set the form action with the correct message ID
+  document.getElementById('markAsReadForm').action = `/custom-admin/messages/${messageId}/mark-read/`;
+  
+  // Rest of your existing modal code...
+  document.getElementById('viewFullName').innerText = button.getAttribute('data-fullname');
+  document.getElementById('viewEmail').innerText = button.getAttribute('data-email');
+  document.getElementById('viewSubject').innerText = button.getAttribute('data-subject');
+  document.getElementById('viewMessage').innerText = button.getAttribute('data-message');
+  document.getElementById('viewDate').innerText = button.getAttribute('data-date');
+  
+  // Update status display
+  const isRead = button.getAttribute('data-isread') === 'true';
+  const statusBadge = document.getElementById('viewStatus');
+  const markAsReadBtn = document.getElementById('markAsReadBtn');
+  
+  if (isRead) {
+    statusBadge.className = 'badge bg-secondary';
+    statusBadge.innerText = 'Read';
+    markAsReadBtn.style.display = 'none';
+  } else {
+    statusBadge.className = 'badge bg-primary';
+    statusBadge.innerText = 'Unread';
+    markAsReadBtn.style.display = 'block';
+  }
+});
 </script>
 {% endblock %}

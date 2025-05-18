@@ -141,7 +141,6 @@ class Sermon(models.Model):
 
 
 # contact database
-
 class Message(models.Model):
     full_name = models.CharField(max_length=150)
     email = models.EmailField()
@@ -149,5 +148,7 @@ class Message(models.Model):
     message = models.TextField()
     date_sent = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)  # New field
+    
     def __str__(self):
         return f"{self.full_name} - {self.subject}"

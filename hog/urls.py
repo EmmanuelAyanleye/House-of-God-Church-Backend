@@ -89,6 +89,6 @@ urlpatterns = [
      
     path('custom-admin/messages/<int:pk>/', views.message_detail, name='message_detail'),
     path('custom-admin/messages/<int:pk>/delete/', views.message_delete, name='message_delete'),
-    
+    path('custom-admin/messages/<int:pk>/mark-read/', views.mark_message_as_read, name='mark_message_as_read'), 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

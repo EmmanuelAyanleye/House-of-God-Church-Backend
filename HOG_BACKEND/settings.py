@@ -67,6 +67,7 @@ TEMPLATES = [
                 'hog.context_processors.categories_processor',
                 'hog.context_processors.events_processor',
                 'hog.context_processors.monthly_events_processor',
+                'hog.context_processors.unread_messages_count',
             ],
         },
     },
