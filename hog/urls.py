@@ -11,20 +11,22 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('our-church/', views.our_church, name='our_church'),
     path('our-pastor/', views.our_pastor, name='our_pastor'),
+    path('departments/', views.departments, name='departments'),
+
     
     # Department routes
-    path('deparment/singles/', views.singles, name='singles'),
-    path('deparment/children/', views.children, name='children'),
-    path('deparment/works/', views.works, name='works'),
-    path('deparment/publication/', views.publication, name='publication'),
-    path('deparment/evangelism/', views.evangelism, name='evangelism'),
-    path('deparment/holy-police/', views.holy, name='holy'),
-    path('deparment/technical-crew/', views.technical, name='technical'),
-    path('deparment/villa-sanitation/', views.villa, name='villa'),
-    path('deparment/pastoral-care/', views.pastoral, name='pastoral'),
-    path('deparment/missions/', views.missions, name='missions'),
-    path('deparment/protocol/', views.protocol, name='protocol'),
-    path('deparment/benevolence/', views.benevolence, name='benevolence'),
+    path('department/singles/', views.singles, name='singles'),
+    path('department/children/', views.children, name='children'),
+    path('department/works/', views.works, name='works'),
+    path('department/publication/', views.publication, name='publication'),
+    path('department/evangelism/', views.evangelism, name='evangelism'),
+    path('department/holy-police/', views.holy, name='holy'),
+    path('department/technical-crew/', views.technical, name='technical'),
+    path('department/villa-sanitation/', views.villa, name='villa'),
+    path('department/pastoral-care/', views.pastoral, name='pastoral'),
+    path('department/missions/', views.missions, name='missions'),
+    path('department/protocol/', views.protocol, name='protocol'),
+    path('department/benevolence/', views.benevolence, name='benevolence'),
     
     # Fellowship and special events
     path('fellowship_sunday/january/', views.january, name='january'),
@@ -92,3 +94,5 @@ urlpatterns = [
     path('custom-admin/messages/<int:pk>/mark-read/', views.mark_message_as_read, name='mark_message_as_read'), 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'hog.views.custom_404_view'

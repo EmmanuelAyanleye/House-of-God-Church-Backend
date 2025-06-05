@@ -8,3 +8,5 @@ urlpatterns = [
     path('', include('hog.urls')),
     path('accounts/', include('django.contrib.auth.urls')),  # Add this line
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'hog.views.custom_404_view'

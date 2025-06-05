@@ -159,6 +159,11 @@ body {
   .hero-section .carousel-item {
     height: 60vh;
   }
+
+  iframe {
+    height: 20rem !important;
+  }
+
   .carousel-overlay h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -859,12 +864,8 @@ textarea.form-control {
   }
 }
 
-#likeBtn, #dislikeBtn, .btn-primary {
-    margin-right: 10px;
-}
-
-#commentSection div {
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
+.ytp-share-button-visible, 
+.ytp-share-button {
+  display: none !important;
+  visibility: hidden !important;
 }

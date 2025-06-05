@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}Page not found{% endblock %}
+
+{% block extra_css %}
+<style>
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .error-404 {
+        font-size: 10rem;
+        font-weight: 900;
+        color: gold;
+        text-shadow: 2px 2px #241b00;
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    .error-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #0d6efd;
+        color: #fff;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .error-link:hover {
+        background-color: #0b5ed7;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container text-center my-5 py-5 fade-in">
+    <div class="error-404">404</div>
+    <h2 class="mt-4">Oops! Page Not Found</h2>
+    <p class="mb-4">The page you're looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <a href="{% url 'index' %}" class="error-link">Go back to Homepage</a>
+</div>
+{% endblock %}

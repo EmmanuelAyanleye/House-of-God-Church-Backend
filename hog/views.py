@@ -74,6 +74,31 @@ def index(request):
 
     return render(request, 'pages/index.html', context)
 
+def custom_404_view(request, exception):
+    return render(request, 'pages/404.html', status=404)
+
+def departments(request):
+    department_list = [
+        {"name": "Children's Church", "url_name": "children"},
+        {"name": "Singles Department", "url_name": "singles"},
+        {"name": "Works Department", "url_name": "works"},
+        {"name": "Publication Department", "url_name": "publication"},
+        {"name": "Evangelism Department", "url_name": "evangelism"},
+        {"name": "Holy Police", "url_name": "holy"},
+        {"name": "Technical Crew", "url_name": "technical"},
+        {"name": "Villa Sanitation", "url_name": "villa"},
+        {"name": "Pastoral Care", "url_name": "pastoral"},
+        {"name": "Missions Department", "url_name": "missions"},
+        {"name": "Protocol Department", "url_name": "protocol"},
+        {"name": "Benevolence Department", "url_name": "benevolence"},
+    ]
+
+    context = {
+        "departments": department_list
+    }
+    return render(request, "pages/department.html", context)
+
+
 def our_church(request):
     page = int(request.GET.get('page', 1))
     
@@ -701,16 +726,17 @@ def monthly_event_view(request, event_type, month):
         )
         gallery = event.gallery.all().order_by('-date_added')
         
-        # Handle description pagination
+        # Handle description pagination (now word-based)
         description = event.description
         page = int(request.GET.get('page', 1))
-        chunk_size = 1150
-        total_pages = (len(description) + chunk_size - 1) // chunk_size
+        words_per_page = 193  
+        words = description.split()
+        total_pages = (len(words) + words_per_page - 1) // words_per_page
         
         # Get the current chunk of text
-        start = (page - 1) * chunk_size
-        end = start + chunk_size
-        current_description = description[start:end]
+        start = (page - 1) * words_per_page
+        end = start + words_per_page
+        current_description = ' '.join(words[start:end])
         
     except MonthlyEvent.DoesNotExist:
         event = None
