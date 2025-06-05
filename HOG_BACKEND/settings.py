@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ugm_(4*eyd#l1cy^rnnb_4u+^787=a4$mb*zp7(s@(7#3suf&(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['house-of-god-church-backend-production.up.railway.app']
+ALLOWED_HOSTS = ['house-of-god-church-backend-production.up.railway.app', '127.0.0.1:8000', '127.0.0.1', 'localhost']
 CSRF_TRUSTED_ORIGINS = ['https://house-of-god-church-backend-production.up.railway.app']
 
 
