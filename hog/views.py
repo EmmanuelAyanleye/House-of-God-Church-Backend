@@ -875,7 +875,7 @@ def church_gallery(request):
 
 def pastor_gallery(request):
     page = request.GET.get('page', 1)
-    images = GalleryImage.objects.filter(category__slug='pastor-gallery').order_by('-date_added')
+    images = GalleryImage.objects.filter(category__slug='pastors-gallery').order_by('-date_added')
     
     paginator = Paginator(images, 28)
     try:
