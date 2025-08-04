@@ -1,0 +1,44 @@
+{% extends 'admin/base_admin.html' %}
+{% block content %}
+
+<div class="container mt-4">
+  <h2 class="mb-4">Add New Sermon</h2>
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data" class="p-4 rounded shadow-sm bg-light">
+    {% csrf_token %}
+    {% load form_tags %}
+
+    
+    <div class="mb-3">
+        {{ form.youtube_url.label_tag }}
+        {{ form.youtube_url|add_class:"form-control" }}
+    </div>
+    
+    <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title|add_class:"form-control" }}
+    </div>
+    
+    <div class="mb-3">
+        {{ form.date_posted.label_tag }}
+        {{ form.date_posted|add_class:"form-control" }}
+    </div>
+    
+    <div class="mb-3">
+        {{ form.description.label_tag }}
+        {{ form.description|add_class:"form-control" }}
+    </div>
+
+    <button class="btn btn-primary w-100" type="submit">Add Sermon</button>
+  </form>
+</div>
+{% endblock %}

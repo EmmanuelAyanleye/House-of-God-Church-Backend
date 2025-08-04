@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% load static %} {% load custom_tags %} {% block title %}Our Church - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<div class="hero-section mt-4">
+    <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('{% static 'images/ca1.png' %}');">
+          <div class="carousel-overlay">
+            <!-- <p>Welcome to</p> -->
+            <h1>LEARN ABOUT THE CHURCH</h1>
+            <p>Join us in worship, experience God's presence, and grow in faith.</p>
+            <p class="service-time"><i class="fa-regular fa-calendar-days"></i> Sunday: 9 AM – Lagos, Nigeria</p>
+            <a href="#" class="watch-btn"><i class="fas fa-video"></i> Watch Live</a>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('{% static 'images/ca3.png' %}');">
+          <div class="carousel-overlay">
+            <!-- <p>Experience</p> -->
+            <h1>LEARN ABOUT THE CHURCH</h1>
+            <p>Come as you are and encounter the transforming power of God.</p>
+            <p class="service-time"><i class="fa-regular fa-calendar-days"></i> Wednesday Bible Study: 6 PM</p>
+            <a href="#" class="watch-btn"><i class="fas fa-video"></i> Watch Live</a>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('{% static 'images/April.jpg' %}');">
+          <div class="carousel-overlay">
+            <!-- <p>Join Our</p> -->
+            <h1>LEARN ABOUT THE CHURCH</h1>
+            <p>Find your place in our growing family of believers.</p>
+            <p class="service-time"><i class="fa-regular fa-calendar-days"></i> Friday Prayer: 6 PM</p>
+            <a href="#" class="watch-btn"><i class="fa-solid fa-video"></i> Watch Live</a>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#churchCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#churchCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      
+      <!-- Custom indicators -->
+      <div class="custom-indicators">
+        <div class="custom-indicator active" data-bs-target="#churchCarousel" data-bs-slide-to="0"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="1"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="2"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ABOUT CHURCH SECTION -->
+    <div class="container church-section">
+    <div class="row align-items-stretch church-row">
+      <div class="col-md-5 d-flex">
+        <div class="w-100 h-100">
+          <img src="{% static 'images/church.png' %}" alt="Church Building" class="church-image h-100 w-100 object-fit-cover rounded">
+        </div>
+      </div>
+      <div class="col-md-6 d-flex">
+        <div class="d-flex flex-column justify-content-center w-100">
+          <h2 class="church-title pb-4">The Household Of God International Ministries</h2>
+          <div class="church-text">
+            {{ content|safe }}
+            
+          </div>
+        </div>
+      </div>
+
+            {% if total_pages > 1 %}
+            <div class="pagination-container">
+                <nav aria-label="Church history navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ prev_page }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for p in total_pages|range_filter %}
+                        <li class="page-item {% if p == current_page %}active{% endif %}">
+                            <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ next_page }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <div class="text-center text-muted small mt-2">
+                    Page {{ current_page }} of {{ total_pages }}
+                </div>
+            </div>
+            {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

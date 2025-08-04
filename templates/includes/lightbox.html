@@ -1,0 +1,36 @@
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-header border-0">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center p-0">
+        <img src="" id="modalImage" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showImage(imageUrl) {
+    document.getElementById("modalImage").src = imageUrl;
+    new bootstrap.Modal(document.getElementById("imageModal")).show();
+  }
+</script>
+
+<style>
+  #imageModal .modal-dialog {
+    max-width: 90vw;
+  }
+  #imageModal .modal-content {
+    background: rgba(0, 0, 0, 0.9);
+  }
+  #imageModal .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+</style>

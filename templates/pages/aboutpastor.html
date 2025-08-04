@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}Our Pastor - HOUSEHOLD OF GOD CHURCH{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+    <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('{% static 'images/ca1.png' %}');">
+          <div class="carousel-overlay">
+            <!-- <p>Welcome to</p> -->
+            <h1>HOUSEHOLD OF GOD CHURCH</h1>
+            <p>Join us in worship, experience God's presence, and grow in faith.</p>
+            <p class="service-time"><i class="fa-regular fa-calendar-days"></i> Sunday: 9 AM – Lagos, Nigeria</p>
+            <a href="#" class="watch-btn"><i class="fas fa-video"></i> Watch Live</a>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('{% static 'images/ca3.png' %}');">
+          <div class="carousel-overlay">
+            <!-- <p>Experience</p> -->
+            <h1>MEET OUR PASTOR</h1>
+            <p>Come as you are and encounter the transforming power of God.</p>
+            <p class="service-time"><i class="fa-regular fa-calendar-days"></i> Wednesday Bible Study: 6 PM</p>
+            <a href="#" class="watch-btn"><i class="fas fa-video"></i> Watch Live</a>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('{% static 'images/April.jpg' %}');">
+          <div class="carousel-overlay">
+            <!-- <p>Join Our</p> -->
+            <h1>MEET OUR PASTOR</h1>
+            <p>Find your place in our growing family of believers.</p>
+            <p class="service-time"><i class="fa-regular fa-calendar-days"></i> Friday Prayer: 6 PM</p>
+            <a href="#" class="watch-btn"><i class="fa-solid fa-video"></i> Watch Live</a>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#churchCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#churchCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      
+      <!-- Custom indicators -->
+      <div class="custom-indicators">
+        <div class="custom-indicator active" data-bs-target="#churchCarousel" data-bs-slide-to="0"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="1"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="2"></div>
+      </div>
+    </div>
+  </div>
+
+<!-- ABOUT PASTOR SECTION -->
+<div class="container church-section">
+    <div class="row align-items-stretch">
+        <div class="col-md-5 mb-4 mb-md-0">
+            <div class="image-container h-100">
+                <img src="{% static 'images/'|add:image %}" 
+                     alt="Reverend Chris Okotie" 
+                     class="pastor-image">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="content-container h-100">
+                <h2 class="church-title">Rev Chris Okotie</h2>
+                <p class="church-subtitle">Pastor, Household of God Church</p>
+                <div class="church-text">
+                    {{ content|safe }}
+                </div>
+                
+            </div>
+        </div>
+        {% if total_pages > 1 %}
+                <div class="pagination-container">
+                    <nav aria-label="Pastor biography navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ prev_page }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            {% for p in total_pages|range_filter %}
+                            <li class="page-item {% if p == current_page %}active{% endif %}">
+                                <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                            </li>
+                            {% endfor %}
+
+                            {% if has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ next_page }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    <div class="text-center text-muted small mt-2">
+                        Page {{ current_page }} of {{ total_pages }}
+                    </div>
+                </div>
+                {% endif %}
+    </div>
+</div>
+
+<style>
+.church-section {
+    padding: 40px 0;
+}
+
+.image-container {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f8f9fa; 
+}
+
+.pastor-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    padding: 10px; 
+    max-height: 100%;  
+}
+
+.content-container {
+    height: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.church-title {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.church-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.church-text {
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.pagination-container {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+.pagination .page-item {
+    margin: 0 2px;
+}
+
+.pagination .page-link {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        gap: 3px;
+    }
+
+    .pagination .page-link {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .pagination .page-item:not(.active):not(:first-child):not(:last-child) {
+        display: none;
+    }
+
+    .pagination .page-item.active {
+        display: inline-block;
+    }
+
+    .image-container {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        min-height: 450px;
+        margin-bottom: 20px;
+    }
+    
+    .pastor-image {
+        padding: 5px;
+    }
+
+    .content-container {
+        height: auto;
+    }
+
+    .pagination-container {
+        padding: 15px 10px;
+    }
+}
+</style>
+{% endblock %}

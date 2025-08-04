@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Protocol Department - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>PROTOCOL DEPARTMENT</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>PROTOCOL DEPARTMENT</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>PROTOCOL DEPARTMENT</h1>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/pastor.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Bro Henry Esonu</h4>
+              <p class="hod-info text-muted small">
+                The Protocol Department is headed by Bro Henry Esonu and he has been serving as the HOD from inception till date.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:protocol@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>protocol@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Protocol Department of the Household of God Church was established in 2011. They are primarily responsible for handling all logistics and travel arrangements for the pastor and other members of the ministry, ensuring seamless coordination both locally and globally. Their duties also include maintaining order and ensuring smooth coordination during church services and other church programs, creating an environment of respect and discipline.
+              <br><br>
+              The department is responsible for security checks, including frisking attendees during church services, to ensure the safety of all worshippers. They also maintain order within the church auditorium, managing seating arrangements and assisting members to their seats, especially during special events.
+              <br><br>
+              The Protocol Department is composed of approximately 40 dedicated members, who work together to fulfill these responsibilities. They meet every last Saturday of the month for planning, training, and reviewing their duties, ensuring they remain efficient in their service.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

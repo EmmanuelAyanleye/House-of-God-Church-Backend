@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Queen Esther    2016 - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+
+
+<!-- GALLERY SECTION -->
+
+<div class="container church-section">
+    <div class="row align-items-stretch church-row">
+      <div class="col-md-5 d-flex">
+        <div class="w-100 h-100">
+          <img src="{% static 'images/ca1.png'%}" alt="Church Building" class="church-image h-100 w-100 object-fit-cover rounded">
+        </div>
+      </div>
+      <div class="col-md-6 d-flex">
+        <div class="d-flex flex-column justify-content-center w-100">
+          <h2 class="church-title">Winner of the 2016 Queen Esther Costume Pageant, Ejiroghene Janice Akpobaro</h2>
+          <p class="church-text">
+            Ejiroghene Janice Akpobaro, playing the character of Rahab, the Harlot emerged the winner of the Queen Esther Costume Pageant in 2016. An indigene of Ughelli North, Delta State. She was born to the family of Mrs Ruth Akpobaro and Mr Joseph Akpobaro on May 15 1994. She is the second of five children.
+            <br><br>
+            She is currently studying Entrepreneurship and Business Management at National Open University of Nigeria (NOUN). She joined Household in 2004. From Children’s church, she went through youth class and proceeded to sit under the teaching of a renowned man of God known for his teaching prowess Rev. Chris Okotie in the adult church.
+            <br>
+            Ejiro is a selfless Christian lady. She believes that her life is about God’s grace and which is her only sustenance.
+            <br>
+            Way to go Ejiro. May you continue to grow in wisdom and Grace.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="church-title text-center mt-5 pt-5">QUEEN ESTHER 2016 GALLERY</h2>
+      <div class="container py-4">
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/ca1.png'%}" data-full="{% static 'images/ca1.png'%}" alt="Image 1" class="gallery-img">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/ca3.png'%}" data-full="{% static 'images/ca3.png'%}" alt="Image 2" class="gallery-img">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/pastor.jpg'%}" data-full="{% static 'images/pastor.jpg'%}" alt="Image 3" class="gallery-img">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/ca1.png'%}" data-full="{% static 'images/ca1.png'%}" alt="Image 4" class="gallery-img">
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+<!-- Overlay -->
+<div class="overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="Lightbox Image">
+  <div class="controls">
+    <button class="btn btn-outline-light" onclick="prevImage()" title="Previous">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <a class="btn btn-outline-light" id="downloadBtn" download target="_blank" title="Download">
+      <i class="fas fa-download"></i>
+    </a>
+    <button class="btn btn-outline-light" onclick="nextImage()" title="Next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <button class="btn btn-outline-light" onclick="closeLightbox()" title="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+
+<script>
+  const images = document.querySelectorAll('.gallery-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showImage(img.dataset.full);
+    });
+  });
+
+  function showImage(src) {
+    lightboxImg.src = src;
+    downloadBtn.href = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+</script>
+
+{% endblock %}

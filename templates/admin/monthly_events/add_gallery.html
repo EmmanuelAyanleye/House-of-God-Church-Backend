@@ -1,0 +1,74 @@
+{% extends 'admin/base_admin.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Add Gallery Images</h2>
+        <a
+          href="{% url 'monthly_event_detail' event.slug %}"
+          class="btn btn-secondary"
+          >Back to Event</a
+        >
+      </div>
+      <p class="mb-0">{{ event.event_type }} - {{ event.get_month_display }}</p>
+    </div>
+
+    <div class="card-body">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %} {% endif %}
+
+      <form method="post" enctype="multipart/form-data" class="mb-4">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label">Year</label>
+          {{ form.year }} {% if form.year.errors %}
+          <div class="text-danger">{{ form.year.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Images</label>
+          <input
+            type="file"
+            name="images"
+            multiple
+            accept="image/*"
+            class="form-control"
+            required
+          />
+          {% if form.images.errors %}
+          <div class="text-danger">{{ form.images.errors }}</div>
+          {% endif %}
+          <small class="form-text text-muted">
+            Hold Ctrl (Windows) or Command (Mac) to select multiple images
+          </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload Images</button>
+      </form>
+
+      {% if gallery %}
+      <h4 class="mt-5">Recent Uploads</h4>
+      <div class="row g-3">
+        {% for image in gallery|slice:":8" %}
+        <div class="col-md-3">
+          <div class="position-relative">
+            <img
+              src="{{ image.image.url }}"
+              class="img-fluid rounded"
+              alt="Gallery image"
+            />
+            <small class="d-block text-muted mt-1"
+              >Year: {{ image.year }}</small
+            >
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

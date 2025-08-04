@@ -1,0 +1,258 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Watch - HOUSEHOLD
+OF GOD CHURCH{% endblock %} {% block content %} 
+
+
+
+{% if error_message %}
+<div class="container mt-1 py-1">
+  <div class="alert alert-info text-center">{{ error_message }}</div>
+</div>
+{% elif sermon %}
+<!-- SERMON DETAILS SECTION -->
+<div class="container mt-4 py-5">
+  <!-- Main Video Section -->
+  <div id="video-container">
+    <iframe
+  width="100%"
+  src="https://www.youtube-nocookie.com/embed/{{ sermon.youtube_url|cut:'https://www.youtube.com/watch?v=' }}?modestbranding=1&rel=0&controls=1&showinfo=0&disablekb=0&fs=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  class="rounded"
+  style="display: block; height: 38rem;"
+>
+    </iframe>
+  </div>
+
+  <div class="mt-3">
+    <h3>{{ sermon.title }}</h3>
+    <p class="text-muted">Posted on {{ sermon.date_posted|date:"F j, Y" }}</p>
+  </div>
+
+  <!-- Description -->
+  <div class="container row gap-4">
+    <button
+    class="btn btn-info col"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#description"
+    aria-expanded="false"
+    >
+      Description
+    </button>
+    <button class="btn btn-outline-primary col" onclick="sharePage()">
+      <i class="fas fa-share"></i> Share
+    </button>
+  </div>
+  <div class="collapse" id="description">
+    <div class="p-3 bg-light rounded">{{ sermon.description|linebreaks }}</div>
+  </div>
+</div>
+{% endif %}
+
+<!-- WATCH MORE SERMONS SECTION -->
+<div class="container pb-5 my-5">
+  <h2 class="text-center mb-4">WATCH MORE VIDEOS</h2>
+  <div class="container mb-4">
+  <div class="container mb-4">
+  <div class="input-group">
+    <input
+      type="text"
+      id="sermonSearch"
+      class="form-control"
+      placeholder="Search sermons..."
+      onkeyup="filterSermons()"
+    />
+    <button class="btn btn-primary" type="button" onclick="filterSermons()">Search</button>
+  </div>
+</div>
+<div id="noResultsMessage" class="alert alert-warning text-center mt-3" style="display: none;">
+  <i class="fas fa-exclamation-triangle"></i> No videos found.
+</div>
+
+</div>
+<script>
+function filterSermons() {
+  const input = document.getElementById('sermonSearch');
+  const filter = input.value.toLowerCase();
+  const sermons = document.querySelectorAll('.sermon-card');
+  let visibleCount = 0;
+
+  sermons.forEach(card => {
+    const title = card.querySelector('h6').textContent.toLowerCase();
+    if (title.includes(filter)) {
+      card.parentElement.style.display = "";  // show the sermon card's column div
+      visibleCount++;
+    } else {
+      card.parentElement.style.display = "none";  // hide the sermon card's column div
+    }
+  });
+
+  // Show or hide the error message
+  const noResultsMessage = document.getElementById('noResultsMessage');
+  if (visibleCount === 0) {
+    noResultsMessage.style.display = "block";
+  } else {
+    noResultsMessage.style.display = "none";
+  }
+}
+</script>
+
+  <div class="row g-4">
+      {% if message %}
+    <div class="col-12 text-center">
+      </i>
+      <p class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        {{ message }}</p>
+    </div>
+    {% else %}
+
+    {% for sermon in more_sermons %}
+    <div class="col-md-3 col-sm-6">
+      <div class="sermon-card">
+        <a
+          href="{% url 'watch' %}?id={{ sermon.id }}"
+          class="text-decoration-none"
+        >
+          <img
+            src="https://img.youtube.com/vi/{{ sermon.youtube_url|cut:'https://www.youtube.com/watch?v=' }}/maxresdefault.jpg"
+            alt="{{ sermon.title }}"
+            class="img-fluid"
+            style="height: 180px; width: 100%; object-fit: cover"
+          />
+          <div class="p-3">
+            <h6 class="text-dark">{{ sermon.title }}</h6>
+            <div class="row">
+              <div class="col">
+                <p style="font-size: 12px">
+                  <i class="fas fa-calendar-alt"></i>
+                  {{ sermon.date_posted|date:"M j, Y" }}
+                </p>
+              </div>
+              <div class="col text-end">
+                <i class="fas fa-share ms-2"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- other pages navigator -->
+  {% if more_sermons.has_other_pages %}
+  <nav class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% if more_sermons.has_previous %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?page={{ more_sermons.previous_page_number }}{% if sermon.id %}&id={{ sermon.id }}{% endif %}"
+        >
+          Previous
+        </a>
+      </li>
+      {% endif %} {% for num in more_sermons.paginator.page_range %}
+      <li
+        class="page-item {% if more_sermons.number == num %}active{% endif %}"
+      >
+        <a
+          class="page-link"
+          href="?page={{ num }}{% if sermon.id %}&id={{ sermon.id }}{% endif %}"
+        >
+          {{ num }}
+        </a>
+      </li>
+      {% endfor %} {% if more_sermons.has_next %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?page={{ more_sermons.next_page_number }}{% if sermon.id %}&id={{ sermon.id }}{% endif %}"
+        >
+          Next
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+
+<style>
+  .sermon-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: transform 0.2s;
+    background: #fff;
+    height: 100%;
+  }
+
+  .sermon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .page-link {
+    color: gold;
+    border-color: gold;
+  }
+
+  .page-item.active .page-link {
+    background-color: gold;
+    border-color: gold;
+    color: #000;
+  }
+
+  .page-link:hover {
+    background-color: gold;
+    border-color: gold;
+    color: #000;
+  }
+
+  .btn-outline-success:hover,
+  .btn-outline-danger:hover,
+  .btn-outline-primary:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- JavaScr
+ ipt for Like, Dislike, and Share -->
+<script>
+
+  document.getElementById("likeBtn").addEventListener("click", function () {
+    const sermonId = this.getAttribute("data-id");
+    handleAction(sermonId, "like");
+  });
+
+  document.getElementById("dislikeBtn").addEventListener("click", function () {
+    const sermonId = this.getAttribute("data-id");
+    handleAction(sermonId, "dislike");
+  });
+
+  function handleAction(sermonId, action) {
+    fetch(`/sermon/${sermonId}/like/`, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `action=${action}`,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("likeCount").textContent = data.likes;
+        document.getElementById("dislikeCount").textContent = data.dislikes;
+      });
+  }
+
+  function sharePage() {
+    const shareUrl = window.location.href;
+    navigator.clipboard.writeText(shareUrl);
+    alert("Link copied to clipboard!");
+  }
+</script>
+{% endblock %}

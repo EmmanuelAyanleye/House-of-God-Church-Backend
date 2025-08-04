@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}  <!-- IMPORTANT -->
+
+{% block content %}
+<style>
+    .department-card {
+        height: 220px;
+        background-image: url("{% static 'images/footer-hh-logo.png' %}");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        color: #ffc107;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: 600;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .department-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .department-card span {
+        position: relative;
+        z-index: 1;
+    }
+
+    .department-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    a.text-decoration-none {
+        width: 100%;
+        display: block;
+    }
+</style>
+
+<div class="container my-5 pt-4">
+    <h2 class="text-center mb-4">Our Departments</h2>
+    <div class="row">
+        {% for dept in departments %}
+        <div class="col-md-4 mb-4">
+            <a href="{% url dept.url_name %}" class="text-decoration-none">
+                <div class="department-card text-center">
+                    <span>{{ dept.name }}</span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

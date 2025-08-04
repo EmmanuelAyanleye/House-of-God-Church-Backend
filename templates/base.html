@@ -1,0 +1,32 @@
+{% load static %}
+{% load hog_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}HOUSEHOLD OF GOD CHURCH{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="icon" href="{% static 'images/footer-hh-logo.png' %}" type="image/png" />
+    <script defer src="{% static 'js/script.js' %}"></script>
+    <!-- CDN LINKS -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/3.0/lineicons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    {% include 'includes/header.html' %} {% block content %} {% endblock %} {% include 'includes/footer.html' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

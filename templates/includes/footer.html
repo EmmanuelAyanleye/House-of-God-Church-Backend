@@ -1,0 +1,91 @@
+{% load static %}
+<footer class="footer text-white">
+  <div class="container">
+    <div class="row align-items-center mb-4">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <img src="{% static 'images/hog-logo.png' %}" alt="Logo" height="60" />
+      </div>
+      <div class="col-md-6">
+        <form class="input-group">
+          <span class="input-group-text bg-white border-0 rounded-start">
+            <i class="fas fa-envelope bg-dark p-2 rounded"></i>
+          </span>
+          <input
+            type="email"
+            class="form-control border-0"
+            placeholder=" info@householdofgodchurch.org"
+          />
+          <button class="btn btn-subscribe rounded-end" type="submit">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+    <hr style="color: #ffffff" />
+    <div class="row text-start mt-4">
+      <!-- Address -->
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">ADDRESS</h6>
+        <p>
+          Plot 4 HouseHold of God Street,<br />
+          Off Kudirat Abiola Way, Clay Bus-Stop,<br />
+          Ikeja, Lagos - Nigeria
+        </p>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">#OKOTIESLETTER</h6>
+        <p>Get Okotie’s Letter now for free</p>
+        <a
+          href="media/okoties-letter.pdf"
+          download="okoties-letter.pdf"
+          class="btn btn-primary newsletter-btn px-4 py-2 rounded w-100 d-flex align-items-center justify-content-center disabled"
+        >
+          <i class="fas fa-download me-2"></i> Download
+        </a>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-md-3 mb-4">
+          <h6 class="fw-bold">FOLLOW US</h6>
+          <p>Follow us on our social Media</p>
+          <div class="social-icons">
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+      <!-- Info Section -->
+      <div class="col-md-3 mb-4">
+        <h6 class="fw-bold">INFO</h6>
+        <div class="info-item">
+          <img src="{% static 'images/footer-hh-logo.png' %}" alt="Prayer" />
+          <!-- Replace with actual image -->
+          <div>
+            <div>Prayer Meeting</div>
+            <small>6pm - 7pm Weekdays</small>
+          </div>
+        </div>
+        <div class="info-item">
+          <img
+            src="{% static 'images/footer-hh-logo.png' %}"
+            alt="Proclaimers"
+          />
+          <div>
+            <div>Proclaimers</div>
+            <small>9pm Saturdays</small>
+          </div>
+        </div>
+        <div class="info-item">
+          <img src="{% static 'images/ca1.png' %}" alt="Apokalupsis" />
+          <div>
+            <div>Apokalupsis</div>
+            <small>7am Sundays on Raypower 100.5fm</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

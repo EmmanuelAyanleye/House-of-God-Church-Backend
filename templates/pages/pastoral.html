@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Pastoral Care - HOUSEHOLD OF GOD CHURCH{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>PASTORAL CARE</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>PASTORAL CARE</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>PASTORAL CARE</h1>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<!-- THE DEPARTMENT -->
+<div class="container church-section">
+    <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+    <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+            <div class="card hod-card shadow-sm">
+                <div class="card-body text-center">
+                    <img src="{% static 'images/pastoral-care.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+                    <h4 class="hod-name mb-2">Miss Ogorchukwu Ogweh</h4>
+                    <p class="hod-info text-muted small">
+                        The administrative Head of Department is Miss Ogorchukwu Ogweh.
+                    </p>
+                    <p class="hod-email mb-0">
+                        <a href="mailto:pastoral_care@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                            <i class="fas fa-envelope me-2"></i>pastoral_care@householdofgodchurch.org
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <p class="church-text mb-0">
+                    {{ content|safe }}
+                </p>
+
+                
+            </div>
+        </div>
+    </div>
+    {% if total_pages > 1 %}
+                <div class="mt-4 pt-2">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ prev_page }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            {% with ''|center:total_pages as range %}
+                            {% for _ in range %}
+                                {% with forloop.counter as p %}
+                                <li class="page-item {% if p == current_page %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                                </li>
+                                {% endwith %}
+                            {% endfor %}
+                            {% endwith %}
+
+                            {% if has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ next_page }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                {% endif %}
+</div>
+
+<style>
+.pagination {
+    margin-top: 2rem;
+}
+
+.page-link {
+    color: gold;
+    border-color: gold;
+    background-color: transparent;
+}
+
+.page-item.active .page-link {
+    background-color: gold;
+    border-color: gold;
+    color: #000;
+}
+
+.page-link:hover {
+    background-color: gold;
+    border-color: gold;
+    color: #000;
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+
+    .page-link {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+</style>
+{% endblock %}

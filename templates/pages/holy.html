@@ -1,0 +1,112 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Holy Police - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>HOLY POLICE</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>HOLY POLICE</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>HOLY POLICE</h1>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/holy-police.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Bro Emeka Okoronkwo</h4>
+              <p class="hod-info text-muted small">
+                The name of the head of Holy Police Department is Bro Emeka Okoronkwo and he has been serving from 2003 till date.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:holy_police@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>holy_police@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Holy Police Department was established in 1988. It is responsible for ensuring the security of cars parked in the church’s car park while members attend worship services. The department also manages traffic during church activities and warmly welcomes members at the parking area, ensuring a smooth flow of vehicles.
+              <br><br>
+              Beyond this, the department is tasked with maintaining the safety of the entire church premises. They ensure a secure environment for worshippers, providing a sense of safety and peace during services. Their duties also include protecting church property from vandalism or unauthorized access, maintaining the sanctity of the holy grounds.
+              <br><br>
+              The department is composed of approximately 20 committed members who volunteer their time and efforts. 
+              <br><br>
+              They convene on the last Saturday of each month to discuss security strategies, review their responsibilities, and plan for upcoming church events.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

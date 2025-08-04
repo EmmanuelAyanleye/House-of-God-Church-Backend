@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Villa Sanitation - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>VILLA SANITATION</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>VILLA SANITATION</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>VILLA SANITATION</h1>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF COORDINATOR</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/villa-head.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">MRS EDNA ONOME OKE</h4>
+              <p class="hod-info text-muted small">
+                The name of the H.O.D is MRS EDNA ONOME OKE and she has been serving for 17 Years
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:villa_sanitation@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>villa_sanitation@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Villa Sanitation Department was formed and inaugurated in 1998. The department is responsible for the thorough cleaning of the Church auditorium, ensuring that the space is always neat, with curtains properly arranged and chairs neatly positioned. 
+              <br><br>
+              Their duties extend to overseeing the preparation of the Communion elements, ensuring they are ready and properly administered during both regular services and wedding ceremonies.
+              <br><br>
+              The Villa Sanitation Department is a dedicated team of approximately 100 members, comprising both men and women who serve diligently. Their scheduled meeting days are as follows: Wednesdays (6:00 am – 9:00 am) for general cleaning, Fridays (4:00 pm – 6:00 pm) for preparation ahead of weekend activities, Saturdays (12:00 noon until the end of all church activities), and Sundays (only on the first Sunday of each month) specifically for Communion preparations. Their commitment ensures that the church remains clean, welcoming, and well-prepared for all events.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

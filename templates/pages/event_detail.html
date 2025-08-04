@@ -1,0 +1,312 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+    {% if event.category.name == 'G.R.A.C.E' %}
+        G.R.A.C.E {{ event.year }} - HOUSEHOLD OF GOD CHURCH
+    {% elif event.category.name == 'Queen Esther' %}
+        Queen Esther {{ event.year }} - HOUSEHOLD OF GOD CHURCH
+    {% else %}
+        {{ event.category.name }} {{ event.year }} - HOUSEHOLD OF GOD CHURCH
+    {% endif %}
+{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>{% if event.category.name == 'G.R.A.C.E' %}
+        G.R.A.C.E {{ event.year }}
+    {% elif event.category.name == 'Queen Esther' %}
+        QUEEN ESTHER {{ event.year }} 
+    {% else %}
+        {{ event.category.name }} {{ event.year }} 
+    {% endif %}</h1>
+                    <p></p>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>{% if event.category.name == 'G.R.A.C.E' %}
+        G.R.A.C.E {{ event.year }}
+    {% elif event.category.name == 'Queen Esther' %}
+        QUEEN ESTHER {{ event.year }} 
+    {% else %}
+        {{ event.category.name }} {{ event.year }} 
+    {% endif %}</h1>
+                    <p></p>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>{% if event.category.name == 'G.R.A.C.E' %}
+        G.R.A.C.E {{ event.year }}
+    {% elif event.category.name == 'Queen Esther' %}
+        QUEEN ESTHER {{ event.year }} 
+    {% else %}
+        {{ event.category.name }} {{ event.year }} 
+    {% endif %}</h1>
+                    <p></p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<div class="container church-section mt-5">
+  <div class="row align-items-stretch church-row">
+    <div class="col-md-5">
+      <div class="image-container">
+        <img
+          src="{{ event.winner_image.url }}"
+          alt="{{ event.title }}"
+          class="church-image"
+        />
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="d-flex flex-column justify-content-center w-100">
+        <h2 class="church-title">{{ event.title |upper }}</h2>
+        <div class="church-text">
+          {{ current_description|safe }}
+        </div>
+      </div>
+    </div>
+    {% if total_pages > 1 %}
+        <div class="">
+          <nav aria-label="Description pagination">
+            <ul class="pagination justify-content-center">
+              {% if has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ prev_page }}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              {% endif %}
+              
+              {% with ''|center:total_pages as range %}
+              {% for _ in range %}
+                {% with forloop.counter as p %}
+                <li class="page-item {% if p == current_page %}active{% endif %}">
+                  <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                </li>
+                {% endwith %}
+              {% endfor %}
+              {% endwith %}
+              
+              {% if has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ next_page }}" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        {% endif %}
+  </div>
+
+  {% if gallery %}
+  <h2 class="church-title text-center mt-5 pt-2">
+    {{ event.category.name }} {{ event.year }} GALLERY
+  </h2>
+  <div class="container py-4">
+    <div class="row g-4">
+      {% for image in gallery %}
+      <div class="col-6 col-md-3">
+        <img
+          src="{{ image.image.url }}"
+          alt="{{ image.caption|default:event.title }}"
+          class="gallery-img"
+          data-full="{{ image.image.url }}"
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Lightbox overlay -->
+<div class="overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="Lightbox Image">
+  <div class="controls">
+    <button class="btn btn-outline-light" onclick="prevImage()" title="Previous">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <a class="btn btn-outline-light" id="downloadBtn" download target="_blank" title="Download">
+      <i class="fas fa-download"></i>
+    </a>
+    <button class="btn btn-outline-light" onclick="nextImage()" title="Next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <button class="btn btn-outline-light" onclick="closeLightbox()" title="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+  const images = document.querySelectorAll('.gallery-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showImage(img.dataset.full);
+    });
+  });
+
+  function showImage(src) {
+    lightboxImg.src = src;
+    downloadBtn.href = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+</script>
+
+<style>
+.church-text {
+    line-height: 1.8;
+    color: #444;
+    font-size: 16px;
+}
+
+.church-text strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.pagination {
+    margin-top: 2rem;
+}
+
+.page-link {
+    color: gold;
+    border-color: gold;
+    background-color: transparent;
+}
+
+.page-item.active .page-link {
+    background-color: gold;
+    border-color: gold;
+    color: #000;
+}
+
+.page-link:hover {
+    background-color: gold;
+    border-color: gold;
+    color: #000;
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+    
+    .page-link {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+.image-container {
+    position: relative;
+    height: 100%;
+    min-height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
+}
+
+.church-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.church-section {
+    padding: 40px 0;
+}
+
+.church-row {
+    min-height: 500px;
+}
+</style>
+{% endblock %} {% endblock %}

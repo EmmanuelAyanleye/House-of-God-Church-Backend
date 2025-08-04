@@ -1,0 +1,167 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Singles Department - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+     <div class="hero-section mt-5 pt-3">
+    <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('images/ca1.png');">
+          <div class="carousel-overlay">
+            <h1>FELLOWSHIP SUNDAY</h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/ca3.png');">
+          <div class="carousel-overlay">
+            <h1>FELLOWSHIP SUNDAY</h1>
+            <p></p>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('images/April.jpg');">
+          <div class="carousel-overlay">
+            <h1>FELLOWSHIP SUNDAY</h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#churchCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#churchCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      
+      <!-- Custom indicators -->
+      <div class="custom-indicators">
+        <div class="custom-indicator active" data-bs-target="#churchCarousel" data-bs-slide-to="0"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="1"></div>
+        <div class="custom-indicator" data-bs-target="#churchCarousel" data-bs-slide-to="2"></div>
+      </div>
+    </div>
+      </div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">THE MONTH OF JANUARY</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/pastor.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 310px; height: 310px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Sis. Celia Nagbuko</h4>
+              <p class="hod-info text-muted small">
+                The January Coordinator
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:january@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>january@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The singles fellowship is a department within the Household of God structure and a veritable channel for singles to maximize their potentials as peculiar single people in Nigeria.
+              Membership is open to church members who are not married and are above 18years. No further qualifications are needed, widows and widowers are welcome. 
+              <br><br>
+              They hold meetings mostly at preannounced weekends for specific programs which provide entertainment, sporting activities and sometimes relevant relationship information peculiar to singles. Through these programs on relationship, brothers and sisters relationships within a household is extended and reinforced beyond the formality of regular church service.
+              <br><br>
+              Past programmes include Village Forum, Battle of the Sexes, Household Olympics, Boat Cruises and Parties. Our vision is to maximize our potentials and underlying operational principles are creativity, decency, and orderliness based exclusively on the word of God.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+
+          <h2 class="church-title text-center mt-5 pt-5">JANUARY 2020 GALLERY</h2>
+      <div class="container py-4">
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/ca1.png'%}" data-full="{% static 'images/ca1.png'%}" alt="Image 1" class="gallery-img">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/ca3.png'%}" data-full="{% static 'images/ca3.png'%}" alt="Image 2" class="gallery-img">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/pastor.jpg'%}" data-full="{% static 'images/pastor.jpg'%}" alt="Image 3" class="gallery-img">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'images/ca1.png'%}" data-full="{% static 'images/ca1.png'%}" alt="Image 4" class="gallery-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- Overlay -->
+<div class="overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="Lightbox Image">
+  <div class="controls">
+    <button class="btn btn-outline-light" onclick="prevImage()" title="Previous">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <a class="btn btn-outline-light" id="downloadBtn" download target="_blank" title="Download">
+      <i class="fas fa-download"></i>
+    </a>
+    <button class="btn btn-outline-light" onclick="nextImage()" title="Next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    <button class="btn btn-outline-light" onclick="closeLightbox()" title="Close">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+
+<script>
+  const images = document.querySelectorAll('.gallery-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      currentIndex = index;
+      showImage(img.dataset.full);
+    });
+  });
+
+  function showImage(src) {
+    lightboxImg.src = src;
+    downloadBtn.href = src;
+    lightbox.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(images[currentIndex].dataset.full);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+</script>
+    </div>
+
+
+
+
+{% endblock %}

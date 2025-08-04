@@ -1,0 +1,13 @@
+{% extends 'admin/base_admin.html' %}
+{% block content %}
+<div class="container mt-4">
+  <div class="alert alert-danger">
+    Are you sure you want to delete the sermon: <strong>{{ sermon.title }}</strong>?
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'admin_sermon_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

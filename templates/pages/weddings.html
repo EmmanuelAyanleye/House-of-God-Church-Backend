@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ category_name }} - HOUSEHOLD OF GOD CHURCH
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+            <h1>WEDDINGS</h1>
+            <p>Love is patient, Love is kind, <br>
+                Love does not envy, Love does not boast,<br>
+                Love is not proud, Love is not rude, Love is not self-seeking, <br>
+                Love is not easily provoked, Love does not think evil, <br>
+                Love does not rejoice in iniquity but rejoices in the truth, <br>
+                Love bears all things, Love believes all things, hopes all things, endures all things.<br>
+                Love never fails. <br>
+                1 Corinthians 13:4-8a
+            </p>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+            <h1>WEDDINGS</h1>
+            <p>Love is patient, Love is kind, <br>
+                Love does not envy, Love does not boast,<br>
+                Love is not proud, Love is not rude, Love is not self-seeking, <br>
+                Love is not easily provoked, Love does not think evil, <br>
+                Love does not rejoice in iniquity but rejoices in the truth, <br>
+                Love bears all things, Love believes all things, hopes all things, endures all things.<br>
+                Love never fails. <br>
+                1 Corinthians 13:4-8a
+            </p>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+            <h1>WEDDINGS</h1>
+            <p>Love is patient, Love is kind, <br>
+                Love does not envy, Love does not boast,<br>
+                Love is not proud, Love is not rude, Love is not self-seeking, <br>
+                Love is not easily provoked, Love does not think evil, <br>
+                Love does not rejoice in iniquity but rejoices in the truth, <br>
+                Love bears all things, Love believes all things, hopes all things, endures all things.<br>
+                Love never fails. <br>
+                1 Corinthians 13:4-8a
+            </p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<!-- THE DEPARTMENT -->
+<div class="container church-section">
+    <h2 class="church-title text-center">{{ category_name }}</h2>
+    <div class="container py-4">
+        <div class="row g-4">
+            {% for image in gallery_images %}
+            <div class="col-6 col-md-3">
+                <img src="{{ image.image.url }}" 
+                     data-full="{{ image.image.url }}" 
+                     alt="{{ image.caption|default:category_name }}" 
+                     class="gallery-img">
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if gallery_images.paginator.num_pages > 1 %}
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if gallery_images.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ gallery_images.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                
+                {% for num in gallery_images.paginator.page_range %}
+                <li class="page-item {% if num == gallery_images.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                
+                {% if gallery_images.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ gallery_images.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="lightbox">
+    <img id="lightbox-img" src="" alt="Lightbox Image">
+    <div class="controls">
+        <button class="btn btn-outline-light" onclick="prevImage()" title="Previous">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <a class="btn btn-outline-light" id="downloadBtn" download target="_blank" title="Download">
+            <i class="fas fa-download"></i>
+        </a>
+        <button class="btn btn-outline-light" onclick="nextImage()" title="Next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="btn btn-outline-light" onclick="closeLightbox()" title="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+const images = document.querySelectorAll('.gallery-img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const downloadBtn = document.getElementById('downloadBtn');
+
+let currentIndex = 0;
+
+images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+        currentIndex = index;
+        showImage(img.dataset.full);
+    });
+});
+
+function showImage(src) {
+    lightboxImg.src = src;
+    downloadBtn.href = src;
+    lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+}
+
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(images[currentIndex].dataset.full);
+}
+
+function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(images[currentIndex].dataset.full);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+});
+</script>
+{% endblock %}

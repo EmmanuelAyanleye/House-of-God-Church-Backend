@@ -1,0 +1,97 @@
+{% extends 'admin/base_admin.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <div class="card">
+    {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %} {% endif %}
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>{{ event.event_type }} - {{ event.get_month_display }}</h2>
+        <div class="btn-group">
+          <a
+            href="{% url 'edit_monthly_event' event.id %}"
+            class="btn btn-primary"
+            >Edit Event</a
+          >
+          <a
+            href="{% url 'add_monthly_event_gallery' event.id %}"
+            class="btn btn-success"
+            >Add Gallery Images</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <!-- Event Details -->
+      <div class="row mb-5">
+        <div class="col-md-4">
+          {% if event.coordinator_image %}
+          <img
+            src="{{ event.coordinator_image.url }}"
+            class="img-fluid rounded"
+            alt="{{ event.coordinator_name }}"
+          />
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <h4>{{ event.title }}</h4>
+          <p><strong>Coordinator:</strong> {{ event.coordinator_name }}</p>
+          <p><strong>Email:</strong> {{ event.coordinator_email }}</p>
+          <p>{{ event.description|linebreaks }}</p>
+        </div>
+      </div>
+
+      <!-- Gallery Section -->
+      <h3>Gallery Images by Year</h3>
+
+      {% if gallery_by_year %} {% for year_group in gallery_by_year %}
+      <div class="card mb-4">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h4 class="mb-0">{{ year_group.grouper }}</h4>
+          <a
+            href="{% url 'add_monthly_event_gallery' event.id %}?year={{ year_group.grouper }}"
+            class="btn btn-sm btn-primary"
+          >
+            Add More Images
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            {% for image in year_group.list %}
+            <div class="col-md-3">
+              <div class="position-relative">
+                <img
+                  src="{{ image.image.url }}"
+                  class="img-fluid rounded"
+                  alt="{{ image.caption }}"
+                  style="height: 200px; object-fit: cover; width: 100%"
+                />
+                <form
+                  method="post"
+                  action="{% url 'delete_gallery_image' image.id %}"
+                  class="position-absolute top-0 end-0 m-2"
+                  onsubmit="return confirm('Are you sure you want to delete this image?')"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="alert alert-info">
+        No gallery images found. Use the button above to add images.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

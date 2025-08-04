@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Benevolence Department - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>BENEVOLENCE DEPARTMENT</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>BENEVOLENCE DEPARTMENT</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>BENEVOLENCE DEPARTMENT</h1>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF DEPARTMENT</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/benevolence-head.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Bro Mike Igbokwe</h4>
+              <p class="hod-info text-muted small">
+                The administrative Head of Department is Bro Mike Igbokwe.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:benevolence@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>benevolence@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The BENEVOLENCE DEPARTMENT of the Household of God church was formed in 1989. The department is responsible for the welfare of the less-privileged or the needy and the poor amongst our congregation and assists them in times of their adversity in the areas of clothing, feeding, rent or rent subsidies and minor medical treatment.
+              <br><br>
+              The department has approximately 88 members.
+              <br>
+              Meeting days are 1ST Sunday and 2ND second Sundays of each month:         
+                <strong>On 1ST Sundays:</strong> All members come early to church for the service on that Sunday and position themselves at strategic points in the Church’s premises and distribute the department’s envelopes to church members for the collection of monetary donations to make material provisions for the registered beneficiaries.
+                <br><br>
+               <strong> 2nd Sunday of each month:</strong> Benevolence Ministration takes place immediately after the service. Also the Departmental business meeting holds once a month at the Holy Ghost Room.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

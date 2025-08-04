@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Missions Department - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>MISSIONS DEPARTMENT</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>MISSIONS DEPARTMENT</h1>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>MISSIONS DEPARTMENT</h1>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF DEPARTMENT</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/mission.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 350px; height: 350px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Brother ‘Lolu Ogunmade</h4>
+              <p class="hod-info text-muted small">
+                Brother ‘Lolu Ogunmade is the head of department of the Missions department and has been in service since the department was inaugurated.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:missions@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>missions@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The Missions Department was founded in March 2008 and was officially inaugurated in July 2008. Since its inception, the department has played a vital role in advancing the mission of The Household of God Church beyond the immediate and surrounding communities.
+              <br><br>
+              The primary responsibility of the department is to extend the reach of the ministry by actively sharing the evangelical message in various locations. This work is carried out with careful attention to the leading of the Holy Spirit and under the guidance of the pastoral office, ensuring that all efforts align with the church’s vision and values. Members of the department engage in organizing outreach programs, mission trips, and community evangelism initiatives to spread the gospel effectively.
+              <br><br>
+              Currently, the Missions Department is composed of about thirty-five (35) committed men and women who dedicate their time and resources to this cause. The department holds regular meetings every Saturday of each month, except on weekends designated for environmental sanitation, during which they support other church activities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

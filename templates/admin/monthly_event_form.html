@@ -1,0 +1,76 @@
+{% extends 'admin/base_admin.html' %} {% load static %} {% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{{ title }}</h2>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary"
+      >Back to Dashboard</a
+    >
+  </div>
+
+  <form
+    method="post"
+    enctype="multipart/form-data"
+    class="bg-white p-4 rounded shadow-sm"
+  >
+    {% csrf_token %}
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="{{ form.event_type.id_for_label }}" class="form-label"
+          >Event Type</label
+        >
+        {{ form.event_type }}
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="{{ form.month.id_for_label }}" class="form-label"
+          >Month</label
+        >
+        {{ form.month }}
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="{{ form.year.id_for_label }}" class="form-label"
+          >Year</label
+        >
+        {{ form.year }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="{{ form.date.id_for_label }}" class="form-label"
+          >Event Date</label
+        >
+        {{ form.date }}
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="{{ form.venue.id_for_label }}" class="form-label"
+          >Venue</label
+        >
+        {{ form.venue }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="{{ form.coordinator.id_for_label }}" class="form-label"
+        >Coordinator</label
+      >
+      {{ form.coordinator }}
+    </div>
+
+    <div class="mb-3">
+      <label for="{{ form.description.id_for_label }}" class="form-label"
+        >Description</label
+      >
+      {{ form.description }}
+    </div>
+
+    <div class="mb-3">
+      <label for="gallery_images" class="form-label">Gallery Images</label>
+      {{ form.gallery_images }}
+      <small class="text-muted">You can select multiple images</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Event</button>
+  </form>
+</div>
+{% endblock %}

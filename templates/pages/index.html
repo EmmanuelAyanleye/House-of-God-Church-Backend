@@ -1,0 +1,528 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Home - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <p>Welcome to</p>
+          <h1>HOUSEHOLD OF GOD CHURCH</h1>
+          <p>
+            Join us in worship, experience God's presence, and grow in faith.
+          </p>
+          <p class="service-time">
+            <i class="fa-regular fa-calendar-days"></i> Sunday: 9 AM – Lagos,
+            Nigeria
+          </p>
+          <a href="#" class="watch-btn"
+            ><i class="fas fa-video"></i> Watch Live</a
+          >
+        </div>
+      </div>
+      <div
+        class="carousel-item"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <p>Welcome to</p>
+          <h1>HOUSEHOLD OF GOD CHURCH</h1>
+          <p>
+            Join us in worship, experience God's presence, and grow in faith.
+          </p>
+          <p class="service-time">
+            <i class="fa-regular fa-calendar-days"></i> Wednesday Bible Study: 6
+            PM
+          </p>
+          <a href="#" class="watch-btn"
+            ><i class="fas fa-video"></i> Watch Live</a
+          >
+        </div>
+      </div>
+      <div
+        class="carousel-item"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <p>Join us @</p>
+          <h1>HOUSEHOLD OF GOD CHURCH</h1>
+          <p>Come and experience the hand of God</p>
+          <p class="service-time">
+            <i class="fa-regular fa-calendar-days"></i> Friday Prayer: 6 PM
+          </p>
+          <a href="#" class="watch-btn"
+            ><i class="fa-solid fa-video"></i> Watch Live</a
+          >
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT CHURCH SECTION -->
+<div class="container church-section">
+  <div class="row align-items-stretch church-row">
+    <div class="col-md-5 d-flex">
+      <div class="w-100 h-100">
+        <img
+          src="{% static 'images/ca1.png' %}"
+          alt="Church Building"
+          class="church-image h-100 w-100 object-fit-cover rounded"
+        />
+      </div>
+    </div>
+    <div class="col-md-6 d-flex">
+      <div class="d-flex flex-column justify-content-center w-100">
+        <h2 class="church-title">A CHURCH WHERE GRACE MEETS GLORY</h2>
+        <p class="church-text">
+          The young ministry had its inaugural Sunday morning service on the 1st
+          of February, 1987 in his living room, then in the Ikeja area of Lagos
+          state. As membership of the young but peculiar church grew into the
+          hundreds and thousands, the surrounding grounds of his house became
+          sitting area for the overspill from the living room.
+          <br /><br />
+          The young ministry had its inaugural Sunday morning service on the 1st
+          of February, 1987 in his living room, then in the Ikeja area of Lagos
+          state.
+        </p>
+        <div class="text-start mt-3">
+          <a href="{% url 'our_church' %}" class="btn-see-more"
+            >See More. . .</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WATCH SERMON SECTION -->
+<div class="watch-sermon">
+  <div class="container">
+    <h2 class="text-center mb-4">WATCH SERMONS</h2>
+    <div class="row g-4">
+      {% if random_sermons %} {% for sermon in random_sermons %}
+      <div class="col-md-3 col-sm-6">
+        <div class="sermon-card">
+          <a
+            href="{% url 'watch' %}?id={{ sermon.id }}"
+            class="text-decoration-none"
+          >
+            <img
+              src="https://img.youtube.com/vi/{{ sermon.youtube_url|slice:'32:' }}/maxresdefault.jpg"
+              alt="{{ sermon.title }}"
+              class="img-fluid"
+              style="height: 180px; width: 100%; object-fit: cover"
+            />
+            <div class="p-3">
+              <h6 class="text-dark">{{ sermon.title }}</h6>
+              <div class="row">
+                <div class="col">
+                  <p style="font-size: 12px">
+                    <i class="fas fa-calendar-alt"></i>
+                    {{ sermon.date_posted|date:"M j, Y" }}
+                  </p>
+                </div>
+                <div class="col text-end">
+                  <i class="fas fa-share ms-2"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-12 text-center">
+        <p class="alert alert-warning">No sermons available at the moment.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="text-center pb-5">
+    <a href="{% url 'watch' %}" class="btn-see-more">See More. . .</a>
+  </div>
+</div>
+
+<!-- PROGRAMME SECTION -->
+<div class="container programme-section">
+  <h2 class="text-center fw-bold mb-4">PROGRAMMES</h2>
+
+  <!-- Desktop View (Horizontal Scrolling) -->
+  <div class="d-none d-lg-block">
+    <div class="row g-4 justify-content-center flex-nowrap overflow-auto py-2">
+      
+
+      <!-- Wednesday Service Card -->
+      <div class="col-auto" style="min-width: 220px">
+        <div class="programme-card h-100" style="background-color: #1a0033">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">{{ next_wednesday.day }}</div>
+          <div class="programme-month">{{ next_wednesday|date:"F" }}</div>
+          <div class="programme-title">Wednesday Service</div>
+        </div>
+      </div>
+
+      <!-- Independence Day Card -->
+      <div class="col-auto" style="min-width: 220px !important">
+        <div class="programme-card h-100" style="background-color: #ffaa00">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">01</div>
+          <div class="programme-month">October</div>
+          <div class="programme-title">Nigeria's Independence</div>
+        </div>
+      </div>
+
+      <!-- Household Programme Card -->
+      <div class="col-auto" style="min-width: 300px">
+        <div
+          class="programme-card h-100"
+          style="background-color: #f15c5c; position: relative"
+        >
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">01</div>
+          <div class="programme-month">February</div>
+          <div class="programme-title">Household is {{ program_number }}!</div>
+          <div
+            class="countdown"
+            style="
+              position: absolute;
+              top: 5px;
+              right: 18px;
+              background: rgba(0, 0, 0, 0.7);
+              color: #fff;
+              border-radius: 3px;
+              font-size: 10.5px;
+              padding: 2px 5px;
+            "
+          >
+             {% if is_today %}
+                        <span>{{ countdown }}</span>
+                    {% else %}
+                        <span>Countdown: {{ countdown }}</span>
+                    {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday Service Card -->
+      <div class="col-auto" style="min-width: 220px">
+        <div class="programme-card h-100" style="background-color: #4d1c1c">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">{{ next_sunday.day }}</div>
+          <div class="programme-month">{{ next_sunday|date:"F" }}</div>
+          <div class="programme-title">Sunday Service</div>
+        </div>
+      </div>
+
+      <!-- Friday Prayer Meeting Card -->
+      <div class="col-auto" style="min-width: 220px">
+        <div class="programme-card h-100" style="background-color: #1c4d3a">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">08</div>
+          <div class="programme-month">JUNE</div>
+          <div class="programme-title">Pastor's Birthday</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile View (Stacked) -->
+  <div class="d-lg-none">
+    <div class="row g-4 justify-content-center">
+      
+
+      <!-- Wednesday Service Card -->
+      <div class="col-md-6 col-12">
+        <div class="programme-card h-100" style="background-color: #1a0033">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">{{ next_wednesday.day }}</div>
+          <div class="programme-month">{{ next_wednesday|date:"F" }}</div>
+          <div class="programme-title">Wednesday Service</div>
+        </div>
+      </div>
+
+      <!-- Independence Day Card -->
+      <div class="col-md-6 col-12">
+        <div class="programme-card h-100" style="background-color: #ffaa00">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">01</div>
+          <div class="programme-month">October</div>
+          <div class="programme-title">Nigeria's Independence</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-12">
+        <div
+          class="programme-card h-100"
+          style="background-color: #f15c5c; position: relative"
+        >
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">01</div>
+          <div class="programme-month">February</div>
+          <div class="programme-title">Household is {{ program_number }}!</div>
+          <div
+            class="countdown"
+            style="
+              position: absolute;
+              top: 5px;
+              right: 5px;
+              background: rgba(0, 0, 0, 0.7);
+              color: #fff;
+              border-radius: 3px;
+              font-size: 10.5px;
+              padding: 2px 5px;
+            "
+          >
+             {% if is_today %}
+                        <span>{{ countdown }}</span>
+                    {% else %}
+                        <span>Countdown: {{ countdown }}</span>
+                    {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday Service Card -->
+      <div class="col-md-6 col-12">
+        <div class="programme-card h-100" style="background-color: #4d1c1c">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">{{ next_sunday.day }}</div>
+          <div class="programme-month">{{ next_sunday|date:"F" }}</div>
+          <div class="programme-title">Sunday Service</div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6 col-12">
+        <div class="programme-card h-100" style="background-color: #1c4d3a">
+          <div class="programme-icon"><i class="fas fa-calendar-alt"></i></div>
+          <div class="programme-date">16</div>
+          <div class="programme-month">JUNE</div>
+          <div class="programme-title">Pastor's Birthday</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK SECTION -->
+<div class="section-container">
+  <div class="container">
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-6 mb-md-0">
+        <h3 class="highlight-title">THE LAST OUTCAST</h3>
+        <p>
+          Who is the Last Outcast? | What is the mystery of iniquity?<br />
+          Who is the antichrist? | What is the religion of the antichrist?<br />
+          How will the antichrist enter our world?<br />
+          Find out in <span class="fw-bold">THE LAST OUTCAST</span>
+        </p>
+        <img
+          src="{% static 'images/book.png' %}"
+          alt="The Last Outcast Book"
+          class="book-img"
+        />
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-md-6">
+        <div class="row mb-2">
+          <div class="col-md-4"><hr /></div>
+          <div class="right-border-title col-md-4 text-center">
+            Huperballó Megethos
+          </div>
+          <div class="col-md-4"><hr /></div>
+        </div>
+        <div class="row align-items-start">
+          <div class="col-sm-5">
+            <img
+              src="{% static 'images/pastor.jpg' %}"
+              alt="Rev. Chris Okotie"
+              class="profile-img mb-3"
+            />
+            <div class="author-info">Rev. Chris Okotie</div>
+            <div class="author-subtitle">Pastor, Household of God Church</div>
+          </div>
+          <div class="col-sm-7">
+            <p>
+              And what is the exceeding greatness of his power to us-ward who
+              believe, according to the working of his mighty power, Which he
+              wrought in Christ, when he raised him from the dead, and set him
+              at his own right hand in the heavenly places, Far above all
+              principality, and power, and might, and dominion at his own right
+              hand in the <br /><br />
+              heavenly places, Far above all principality, and power, and might,
+              and dominion...
+            </p>
+            <a href="{% url 'our_pastor' %}" class="btn btn-seemore"
+              >See More</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<div class="contact-section" id="contact-section">
+  <div class="container">
+    <div class="row align-items-start g-5">
+      <!-- Left column: Contact Info -->
+      <div class="col-lg-6 d-flex flex-column left-column">
+        <h3 class="fw-bold">SEND US A MESSAGE</h3>
+        <p class="text-muted">
+          Questions, comments, or suggestions? Simply fill in the form and we’ll
+          be in touch shortly.
+        </p>
+        <div class="contact-info">
+          <p>
+            <i class="fas fa-location-dot bg-dark p-2 rounded"></i> Plot 4
+            HouseHold of God Street, Off Kudirat Abiola Way, Clay Bus–Stop,
+            Ikeja, Lagos – Nigeria
+          </p>
+          <p>
+            <i class="fas fa-envelope bg-dark p-2 rounded"></i>
+            info@householdofgodchurch.org
+          </p>
+          <p>
+            <i class="fas fa-phone bg-dark p-2 rounded"></i> +234 813 6633 494,
+            +234 702 6828 318
+          </p>
+        </div>
+      </div>
+
+      <!-- Right column: Form -->
+      <div class="col-lg-6">
+        <div class="contact-box">
+          <form action="{% url 'contact' %}" method="POST">
+            {% csrf_token %}
+            <h4 class="">CONTACT FORM</h4>
+            <p>Kindly fill the form below to reach out to us</p>
+            <div class="form-group">
+              <i class="fas fa-user bg-dark px-2 py-2 rounded"></i>
+              <input
+                type="text"
+                name="full_name"
+                class="form-control"
+                placeholder="Full Name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <i class="fas fa-envelope bg-dark px-2 py-2 rounded"></i>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Email Address"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <i class="fas fa-tag bg-dark px-2 py-2 rounded"></i>
+              <input
+                type="text"
+                name="subject"
+                class="form-control"
+                placeholder="Subject"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <i class="fas fa-comment-dots bg-dark px-2 py-2 rounded"></i>
+              <textarea
+                name="message"
+                class="form-control"
+                rows="4"
+                placeholder="Write your message here..."
+                required
+              ></textarea>
+            </div>
+            <div class="text-end">
+              <button type="submit" class="btn btn-custom">
+                <i class="fas fa-paper-plane me-2"></i> Send Message
+              </button>
+            </div>
+          </form>
+          {% if messages %}
+          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            {% for message in messages %}
+            <div
+              class="toast align-items-center text-bg-success border-0 mb-2"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div class="d-flex">
+                <div class="toast-body">{{ message }}</div>
+                <button
+                  type="button"
+                  class="btn-close btn-close-white me-2 m-auto"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              var toastElList = [].slice.call(
+                document.querySelectorAll(".toast")
+              );
+              toastElList.forEach(function (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, { delay: 5000 });
+                toast.show();
+              });
+            });
+          </script>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Singles Department - HOUSEHOLD OF
+GOD CHURCH{% endblock %} {% block content %}
+<!-- HERO SECTION -->
+<div class="hero-section mt-4">
+  <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca1.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>SINGLES DEPARTMENT</h1>
+          <p>A Veritable Channel for Singles to Maximize Their Potentials!</p>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/ca3.png' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>SINGLES DEPARTMENT</h1>
+          <p>A Veritable Channel for Singles to Maximize Their Potentials!</p>
+        </div>
+      </div>
+      <div
+        class="carousel-item active"
+        style="background-image: url('{% static 'images/April.jpg' %}')"
+      >
+        <div class="carousel-overlay">
+          <h1>SINGLES DEPARTMENT</h1>
+          <p>A Veritable Channel for Singles to Maximize Their Potentials!</p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#churchCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+    <!-- Custom indicators -->
+    <div class="custom-indicators">
+      <div
+        class="custom-indicator active"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="0"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="1"
+      ></div>
+      <div
+        class="custom-indicator"
+        data-bs-target="#churchCarousel"
+        data-bs-slide-to="2"
+      ></div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- THE DEPARTMENT -->
+    <div class="container church-section">
+      <h2 class="church-title pb-4 text-center">MEET OUR HEAD OF DEPARTMENT</h2>
+      <div class="row align-items-stretch church-row">
+        <div class="col-md-5 hod-section align-items-center justify-content-center d-flex">
+          <div class="card hod-card shadow-sm">
+            <div class="card-body text-center">
+              <!-- <h4 class="card-title mb-3">Meet Our Head of Department</h4> -->
+              <img src="{% static 'images/singles-head.jpg' %}" alt="Head of Department" class="img-fluid rounded-circle mb-3" style="width: 310px; height: 310px; object-fit: cover;">
+              <h4 class="hod-name mb-2">Bro. Mike Mogo</h4>
+              <p class="hod-info text-muted small">
+                The Department was formed in 1987, shortly after the inception of the church.
+              </p>
+              <p class="hod-email mb-0">
+                <a href="mailto:singles@householdofgodchurch.org" class="btn bg-dark btn-sm">
+                  <i class="fas fa-envelope me-2"></i>singles@householdofgodchurch.org
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-md-6 d-flex align-items-center">
+          <div>
+            <p class="church-text mb-0">
+              The singles fellowship is a department within the Household of God structure and a veritable channel for singles to maximize their potentials as peculiar single people in Nigeria.
+              Membership is open to church members who are not married and are above 18years. No further qualifications are needed, widows and widowers are welcome. 
+              <br><br>
+              They hold meetings mostly at preannounced weekends for specific programs which provide entertainment, sporting activities and sometimes relevant relationship information peculiar to singles. Through these programs on relationship, brothers and sisters relationships within a household is extended and reinforced beyond the formality of regular church service.
+              <br><br>
+              Past programmes include Village Forum, Battle of the Sexes, Household Olympics, Boat Cruises and Parties. Our vision is to maximize our potentials and underlying operational principles are creativity, decency, and orderliness based exclusively on the word of God.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

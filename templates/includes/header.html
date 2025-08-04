@@ -1,0 +1,273 @@
+{% load static %}
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'images/hog-logo.png' %}" alt="Logo" />
+      </a>
+      <button class="navbar-toggler" type="button" id="navbar-toggler">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              href="{% url 'index' %}"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              >About</a
+            >
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{% url 'our_church' %}"
+                  >Our Church</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'our_pastor' %}"
+                  >Our Pastor</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              >Departments</a
+            >
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="{% url 'children' %}"
+                  >Children's Church</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'singles' %}"
+                  >Singles Department</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{%url 'works' %}"
+                  >Works Department</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'publication' %}"
+                  >Publication Department</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'evangelism' %}"
+                  >Evangelism Department</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'holy' %}">Holy Police</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'technical' %}"
+                  >Technical Crew</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'villa' %}"
+                  >Villa Sanitation</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'pastoral' %}"
+                  >Pastoral Care</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'missions' %}"
+                  >Missions Department</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'protocol' %}"
+                  >Protocol Department</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'benevolence' %}"
+                  >Benevolence Department</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              >Events</a
+            >
+            <ul class="dropdown-menu">
+              <!-- Fellowship Sunday -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="#"
+                  >Fellowship Sunday</a
+                >
+                <ul class="dropdown-menu">
+                  {% for month_num, month_name in monthly_events.months %}
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'fellowship_sunday' month_name|lower %}"
+                    >
+                      {{ month_name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <!-- Christmas Carol Competition -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="#"
+                  >Christmas Carol Competition</a
+                >
+                <ul class="dropdown-menu">
+                  {% for month_num, month_name in monthly_events.months %}
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'christmas_carol' month_name|lower %}"
+                    >
+                      {{ month_name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+
+              <!-- Hallelujah Party -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="#"
+                  >Hallelujah Party</a
+                >
+                <ul class="dropdown-menu">
+                  {% for month_num, month_name in monthly_events.months %}
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'hallelujah_party' month_name|lower %}"
+                    >
+                      {{ month_name }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li><a class="dropdown-item" href="{% url 'baby_dedication' %}">Baby Dedication</a></li>
+              <li><a class="dropdown-item" href="{% url 'weddings' %}">Weddings</a></li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="#">Queen Esther</a>
+                <ul class="dropdown-menu">
+                  {% for event in events_by_category.Queen_Esther %}
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'event_detail' event.slug %}"
+                    >
+                      Queen Esther {{ event.year }}
+                    </a>
+                  </li>
+                  {% empty %}
+                  <li>
+                    <a class="dropdown-item disabled" href="#">No events yet</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item" href="#">G.R.A.C.E</a>
+                <ul class="dropdown-menu">
+                  {% for event in events_by_category.GRACE %}
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'event_detail' event.slug %}"
+                    >
+                      G.R.A.C.E {{ event.year }}
+                    </a>
+                  </li>
+                  {% empty %}
+                  <li>
+                    <a class="dropdown-item disabled" href="#">No events yet</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              <li><a class="dropdown-item" href="{% url 'christmas_light' %}">Christmas Lights</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              >Media</a
+            >
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'church_gallery' %}">Church Gallery</a></li>
+              <li><a class="dropdown-item" href="{% url 'pastor_gallery' %}">Pastor's Gallery</a></li>
+              <li><a class="dropdown-item" href="{% url 'watch' %}">Watch Sermon</a></li>
+              <li><a class="dropdown-item" href="#">Music</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}#contact-section">Contact Us</a>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+  }
+
+  .navbar-nav .nav-link:hover, 
+  .navbar-nav .nav-link.active, 
+  .navbar-nav .dropdown-menu .dropdown-item.active {
+    color: gold !important;
+  }
+
+  .dropdown-menu .dropdown-item:hover {
+    color: gold !important;
+    background-color: transparent !important;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link, .dropdown-menu .dropdown-item");
+    const currentUrl = window.location.pathname + window.location.hash;
+
+    navLinks.forEach(link => {
+      if (link.getAttribute("href") === currentUrl || link.getAttribute("href") === window.location.hash) {
+        link.classList.add("active");
+      }
+    });
+  });
+</script>
